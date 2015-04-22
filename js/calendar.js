@@ -10,7 +10,7 @@ d3.csv("user_data/headerFile.csv", function(error, csv) {
         }
         return d.Day;
     })
-    .rollup(function(d) { if (parseFloat(d[0].Cost.substring(d[0].Cost.indexOf('$') + 1)) > valueRange) {valueRange = parseFloat(d[0].Cost.substring(d[0].Cost.indexOf('$') + 1))};return d[0].Cost; })
+    .rollup(function(d) { if (parseFloat(d[0].Cost.substring(d[0].Cost.indexOf('$') + 1)) > valueRange) {valueRange = parseFloat(d[0].Cost.substring(d[0].Cost.indexOf('$') + 1))};return d[0].Cost.trim(); })
     .map(csv);
 
   visualize(yearRange, valueRange);
@@ -26,7 +26,6 @@ d3.csv("user_data/headerFile.csv", function(error, csv) {
   function mouseover(d) {
     tooltip.style("visibility", "visible");
     var purchase_text = d + ": " + data[d];
-
     tooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
@@ -58,7 +57,7 @@ var day = d3.time.format("%w"), // day of the week
     month = d3.time.format("%m"), // month number
     year = d3.time.format("%Y"),
     percent = d3.format(".1%"),
-    format = d3.time.format("%-m/%-d/%-y");
+    format = d3.time.format("%-m/%-d/%-Y");
 
 var color;
 var svg;
