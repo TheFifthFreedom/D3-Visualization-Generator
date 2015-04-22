@@ -1,0 +1,55 @@
+form {
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica;
+}
+
+#chart{
+  font: 1.1em sans-serif;
+  width: 800px;
+  margin: 0 auto;
+}
+.background {
+  fill: #eee;
+}
+
+line {
+  stroke: #fff;
+}
+
+text.active {
+  fill: red;
+}
+
+.day {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.month {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 4px;
+}
+.year-title {
+  font-size: 1.5em;
+}
+
+/* color ranges */
+.RdYlGn .q0-10{fill:rgb(228,232,103)}
+.RdYlGn .q1-10{fill:rgb(161,226,124)}
+.RdYlGn .q2-10{fill:rgb(101,213,154)}
+.RdYlGn .q3-10{fill:rgb(61,195,179)}
+.RdYlGn .q4-10{fill:rgb(74,172,191)}
+.RdYlGn .q5-10{fill:rgb(112,147,184)}
+.RdYlGn .q6-10{fill:rgb(141,121,161)}
+.RdYlGn .q7-10{fill:rgb(153,96,127)}
+.RdYlGn .q8-10{fill:rgb(153,96,127)}
+.RdYlGn .q9-10{fill:rgb(148,78,90)}
+
+/* hover info */
+#tooltip {
+  font: 1.1em sans-serif;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px;
+}
