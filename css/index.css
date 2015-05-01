@@ -1,0 +1,21 @@
+.login{
+    height: 256px;
+    width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -128px;
+    margin-left: -300px;
+}
+
+#regularLogin{
+    border-right: 1px dashed #333;
+}
+
+#specialLogin{
+    top: 29%;
+}
+
+#laddaButton2{
+    left: 74%;
+}
