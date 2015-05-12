@@ -24,7 +24,7 @@ $('select').on('change', function(){
 
     $('select').popover({
         html: true,
-        trigger: 'manual',
+        trigger: 'focus',
         placement: 'bottom',
         title: function(){return $(this).children('option:selected').attr("data-title");},
         content: function(){return $(this).children('option:selected').attr("data-content") + "<br><a href='/download/" + $(this).children('option:selected').attr('value') + "_sample.csv' download>Download sample</a>";} //this
@@ -61,12 +61,8 @@ $('#btn-download').on('click', function(){
     e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
     e.setAttribute('class', 'svg-crowbar');
     document.body.appendChild(e);
+});
 
-    $('.svg-crowbar > .svg-crowbar > button').on('click', function(){
-        console.log('hello');
-    });
-
-    // setTimeout(function(){
-    //     d3.selectAll(".svg-crowbar").remove();
-    // }, 3000);
+$(document.body).on('click', '.svg-crowbar > .svg-crowbar > button', function(){
+    d3.selectAll(".svg-crowbar").remove();
 });

@@ -20,13 +20,13 @@ class GraphingServer(object):
 
     @cherrypy.expose
     def index(self):
-        return open(os.path.abspath('html/index.html'))
+        # return open(os.path.abspath('html/index.html'))
         # Checking cookies
-        # request_cookie = cherrypy.request.cookie
-        # if request_cookie.keys() and request_cookie['session_id'].value in valid_sessions:
-        #     return open(os.path.abspath('html/index.html'))
-        # else:
-        #     return open(os.path.abspath('html/paywall.html'))
+        request_cookie = cherrypy.request.cookie
+        if request_cookie.keys() and request_cookie['session_id'].value in valid_sessions:
+            return open(os.path.abspath('html/index.html'))
+        else:
+            return open(os.path.abspath('html/paywall.html'))
 
     @cherrypy.expose
     def authenticate(self, pid, pmName, userName):
@@ -119,9 +119,9 @@ class GraphingServer(object):
     @cherrypy.expose
     def upload(self, input_file, viz_type):
         # Checking to see if the cookie is still there
-        # request_cookie = cherrypy.request.cookie
-        # if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
-        #     raise cherrypy.HTTPRedirect('/index')
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
 
         all_data = bytearray()
         while True:
