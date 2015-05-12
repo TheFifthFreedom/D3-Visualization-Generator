@@ -83,7 +83,7 @@ d3.csv("user_data/noHeaderFile.csv", function(error, rows) {
   outerRadius = innerRadius * 1.1,
   outer
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("#d3Viz").append("svg")
   .attr("width", width+200)
   .attr("height", height+200)
   .append("g")

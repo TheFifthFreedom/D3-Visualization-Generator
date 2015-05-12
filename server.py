@@ -18,42 +18,13 @@ class GraphingServer(object):
 
     @cherrypy.expose
     def index(self):
-
-        no_paywall_response = """
-            <!DOCTYPE html>
-            <meta charset="utf-8">
-            <html>
-                <head>
-                    <style>
-                        body {
-                          font-size: 12px;
-                          font-family: "Helvetica Neue", Helvetica;
-                        }
-                    </style>
-                    <title>D3 Visualization Generator</title>
-                </head>
-                <body>
-                    <form action="upload" method="post" enctype="multipart/form-data">
-                        Select CSV to upload:
-                        <input type="file" name="input_file"></input>
-                        <select name="viz_type">
-                            <option value="chord">Chord Diagram</option>
-                            <option value="sunburst">Sequences Sunburst</option>
-                            <option value="calendar">Calendar View</option>
-                            <option value="linkscape">LinkScape</option>
-                        </select>
-                        <input type="submit" value="Submit"></input>
-                    </form>
-                </body>
-            </html>
-        """
-
+        return open(os.path.abspath('html/index.html'))
         # Checking cookies
-        request_cookie = cherrypy.request.cookie
-        if request_cookie.keys() and request_cookie['session_id'].value in valid_sessions:
-            return no_paywall_response
-        else:
-            return open(os.path.abspath('html/index.html'))
+        # request_cookie = cherrypy.request.cookie
+        # if request_cookie.keys() and request_cookie['session_id'].value in valid_sessions:
+        #     return no_paywall_response
+        # else:
+        #     return open(os.path.abspath('html/paywall.html'))
 
     @cherrypy.expose
     def authenticate(self, pid, pmName, userName):
@@ -146,9 +117,9 @@ class GraphingServer(object):
     @cherrypy.expose
     def upload(self, input_file, viz_type):
         # Checking to see if the cookie is still there
-        request_cookie = cherrypy.request.cookie
-        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
-            raise cherrypy.HTTPRedirect('/index')
+        # request_cookie = cherrypy.request.cookie
+        # if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+        #     raise cherrypy.HTTPRedirect('/index')
 
         all_data = bytearray()
         while True:

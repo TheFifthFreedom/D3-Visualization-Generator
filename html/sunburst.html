@@ -2,24 +2,38 @@
 <meta charset="utf-8">
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+        <link rel="stylesheet" href="css/header.css">
         <link rel="stylesheet" type="text/css" href="css/sunburst.css"/>
         <title>Sequences Sunburst</title>
     </head>
 
     <body>
-        <form action="upload" method="post" enctype="multipart/form-data">
-            Select CSV to upload:
-            <input type="file" name="input_file"></input>
-            <select name="viz_type">
-                <option value="chord">Chord Diagram</option>
-                <option value="sunburst">Sequences Sunburst</option>
-                <option value="calendar">Calendar View</option>
-                <option value="linkscape">LinkScape</option>
-            </select>
-            <input type="submit" value="Submit"></input>
-            <a class="download" href="javascript:javascript: (function () { var e = document.createElement('script'); e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js'); e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();">Download SVG</a>
-        </form>
+        <div id="overhead">
+            <fieldset>
+                <form class="form-inline" action="upload" method="post" enctype="multipart/form-data">
+                    <!-- <input type="file" name="input_file"></input> -->
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                                Select CSV to upload&hellip; <input type="file" name="input_file" multiple>
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" style="width: 250px" readonly>
+                    </div>
+                    <select class="form-control" name="viz_type">
+                        <option value disabled selected hidden>-- Select a Visualization --</option>
+                        <option value="chord" data-title="Instructions" data-content="This requires the Top Conversion Paths CSV export from Google Analytics, which you can get by navigating via the left-hand side menu to Conversions > Multi-Channel Funnels > Top Conversion Paths">Chord Diagram</option>
+                        <option value="sunburst" data-title="Instructions" data-content="This requires the Top Conversion Paths CSV export from Google Analytics, which you can get by navigating via the left-hand side menu to Conversions > Multi-Channel Funnels > Top Conversion Paths">Sequences Sunburst</option>
+                        <option value="calendar" data-title="Instructions" data-content="This requires a CSV file with just two untitled columns: the first should contain one date in each row in the format M/D/YYYY, and the second should contain a monetary value (no commas) that starts with a $ sign.">Calendar View</option>
+                        <option value="linkscape" data-title="Instructions" data-content="This was originally designed for moz' advanced inbound links report, but now only requires a CSV with at least two columns: one of them named 'Source' and another named 'Target', each containing whatever you want.">LinkScape</option>
+                    </select>
+                    <input id="btn-submit" class="btn btn-default" type="submit" value="Submit" disabled="disabled">
+                </form>
+            </fieldset>
+        </div>
+
         <div id="main">
             <div id="sequence"></div>
             <div id="chart">
@@ -33,11 +47,10 @@
             <input type="checkbox" id="togglelegend">Legend<br/>
             <div id="legend" style="visibility: hidden;"></div>
         </div>
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script type="text/javascript" src="js/sunburst.js"></script>
-        <script type="text/javascript">
-            // Hack to make this example display correctly in an iframe on bl.ocks.org
-            d3.select(self.frameElement).style("height", "700px");
-        </script>
+        <script src="js/header.js"></script>
+        <script src="js/sunburst.js"></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  // Disabling submit button until all fiels have been populated
+  // Disabling submit button until all fields have been populated
   $('#regularLogin input').keyup(function() {
         var empty = false;
         $('#regularLogin input').each(function() {
@@ -90,7 +90,7 @@ $(document).ready(function(){
         //Button spniwheel
         var l = Ladda.create(document.getElementById('laddaButton'));
         l.start();
-        
+
         var postdata = {password: $("#master").val()};
         $.post("/master_authenticate", postdata, function(data){
             jsonData = JSON.parse(data);
