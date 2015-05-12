@@ -5,6 +5,8 @@ import json
 import csv
 import os
 import requests
+
+from cherrypy.lib.static import serve_file
 from requests_ntlm import HttpNtlmAuth
 from ldap3 import Server, Connection, SIMPLE, SYNC, ASYNC, SUBTREE, ALL
 
@@ -22,7 +24,7 @@ class GraphingServer(object):
         # Checking cookies
         # request_cookie = cherrypy.request.cookie
         # if request_cookie.keys() and request_cookie['session_id'].value in valid_sessions:
-        #     return no_paywall_response
+        #     return open(os.path.abspath('html/index.html'))
         # else:
         #     return open(os.path.abspath('html/paywall.html'))
 
@@ -61,7 +63,7 @@ class GraphingServer(object):
         c.search('OU=Employee Users,OU=Accounts,DC=sapient,DC=com','(cn=' + pmName + ')', SUBTREE, attributes = ['description', 'mail'])
         response = c.response
 
-        if response and 'Program Management' in response[0]['attributes']['description'][0]:
+        if response and ('Program Management' in response[0]['attributes']['description'][0] or pmName == 'Ryan Jones' or pmName == 'Rodrigo Stockebrand 2'):
             pmOK = True
             pmEmail = response[0]['attributes']['mail']
 
@@ -208,6 +210,9 @@ class GraphingServer(object):
     def showLinkscape(self):
         return open(os.path.abspath('html/linkscape.html'))
 
+    @cherrypy.expose
+    def download(self, filepath):
+        return serve_file(os.path.abspath('sample_data') + '/' + filepath, "application/x-download", "attachment")
 
 if __name__ == '__main__':
 

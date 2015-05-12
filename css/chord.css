@@ -1,0 +1,12 @@
+body {
+    position: relative;
+}
+
+ul{
+    position: absolute;
+}
+
+svg{
+    margin: 0 auto;
+    display: block;
+}

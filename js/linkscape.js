@@ -1,5 +1,5 @@
-var width = $(document).width() - 15,
-    height = $(document).height() - 30;
+var width = $(document).width() - 10,
+    height = $(document).height() - 78;
 
 var colors = ['#f6faaa','#FEE08B','#FDAE61','#F46D43','#D53E4F','#9E0142'];
 var colorScale = d3.scale.quantile()

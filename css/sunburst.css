@@ -3,18 +3,19 @@ body {
   font-size: 12px;
   font-weight: 400;
   background-color: #fff;
-  width: 960px;
-  height: 700px;
   margin-top: 10px;
+  position: relative;
 }
 
 #main {
-  float: left;
+  margin: 0 auto;
   width: 750px;
 }
 
 #sidebar {
-  float: right;
+  position: absolute;
+  top: 30%;
+  right: 10%;
   width: 100px;
 }
 

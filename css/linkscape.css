@@ -1,3 +1,7 @@
+body {
+    padding: 5px;
+}
+
 .link {
   stroke: #ccc;
 }
