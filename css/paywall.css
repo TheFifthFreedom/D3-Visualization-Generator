@@ -1,19 +1,23 @@
-.login{
-    height: 256px;
+body {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.paywall {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.login {
+    margin-left: auto;
+    margin-right: auto;
     width: 600px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -128px;
-    margin-left: -300px;
 }
 
 #regularLogin{
     border-right: 1px dashed #333;
-}
-
-#specialLogin{
-    top: 29%;
 }
 
 #laddaButton2{

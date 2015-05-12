@@ -10,34 +10,36 @@
               <title>D3 Visualization Generator</title>
           </head>
           <body>
-              <div class="login row animated fadeInUp">
-                  <form id="regularLogin" data-toggle="validator" class="col-md-6">
-                      <div class="form-group pid">
-                          <label for="pid">Project ID</label>
-                          <input type="text" class="form-control" id="pid" placeholder="ex: 63492" aria-describedby="pidHelp">
-                          <span id="pidHelp" class="help-block"></span>
-                      </div>
-                      <div class="form-group pmName">
-                          <label for="pmName">Project Manager's name</label>
-                          <input type="text" class="form-control" id="pmName" placeholder="ex: Robert Maunsell 2" aria-describedby="pmHelp">
-                          <span id="pmHelp" class="help-block"></span>
-                      </div>
-                      <div class="form-group userName">
-                          <label for="userName">Your name</label>
-                          <input type="text" class="form-control" id="userName" placeholder="ex: Rodrigo Stockebrand 2" aria-describedby="userHelp">
-                          <span id="userHelp" class="help-block"></span>
-                      </div>
-                      <button type="submit" class="btn btn-default ladda-button" data-style="zoom-in" data-spinner-color="black" id="laddaButton" disabled="disabled"><span class="ladda-label">Submit</span></button>
-                  </form>
+              <div class="paywall">
+                  <div class="login row animated fadeInUp">
+                      <form id="regularLogin" data-toggle="validator" class="col-md-6">
+                          <div class="form-group pid">
+                              <label for="pid">Project ID</label>
+                              <input type="text" class="form-control" id="pid" placeholder="ex: 63492" aria-describedby="pidHelp">
+                              <span id="pidHelp" class="help-block"></span>
+                          </div>
+                          <div class="form-group pmName">
+                              <label for="pmName">Project Manager's name</label>
+                              <input type="text" class="form-control" id="pmName" placeholder="ex: Robert Maunsell 2" aria-describedby="pmHelp">
+                              <span id="pmHelp" class="help-block"></span>
+                          </div>
+                          <div class="form-group userName">
+                              <label for="userName">Your name</label>
+                              <input type="text" class="form-control" id="userName" placeholder="ex: Rodrigo Stockebrand 2" aria-describedby="userHelp">
+                              <span id="userHelp" class="help-block"></span>
+                          </div>
+                          <button type="submit" class="btn btn-default ladda-button" data-style="zoom-in" data-spinner-color="black" id="laddaButton" disabled="disabled"><span class="ladda-label">Submit</span></button>
+                      </form>
 
-                  <form id="specialLogin" data-toggle="validator" class="col-md-6">
-                      <div class="form-group master">
-                          <label for="master">Master Password</label>
-                          <input type="password" class="form-control" id="master" aria-describedby="masterHelp">
-                          <span id="masterHelp" class="help-block"></span>
-                      </div>
-                      <button type="submit" class="btn btn-default ladda-button" data-style="zoom-in" data-spinner-color="black" id="laddaButton2" disabled="disabled"><span class="ladda-label">Submit</span></button>
-                  </form>
+                      <form id="specialLogin" data-toggle="validator" class="col-md-6">
+                          <div class="form-group master">
+                              <label for="master">Master Password</label>
+                              <input type="password" class="form-control" id="master" aria-describedby="masterHelp">
+                              <span id="masterHelp" class="help-block"></span>
+                          </div>
+                          <button type="submit" class="btn btn-default ladda-button" data-style="zoom-in" data-spinner-color="black" id="laddaButton2" disabled="disabled"><span class="ladda-label">Submit</span></button>
+                      </form>
+                  </div>
               </div>
               <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
               <script type="text/javascript" src="http://fgnass.github.io/spin.js/spin.min.js"></script>

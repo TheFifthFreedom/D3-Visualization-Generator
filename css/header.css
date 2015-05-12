@@ -25,6 +25,5 @@ fieldset {
     display: inline-block;
 }
 #overhead {
-    margin: 0 auto;
-    width: 857px;
+    text-align: center;
 }
