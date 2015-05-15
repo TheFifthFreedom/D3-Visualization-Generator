@@ -2,9 +2,6 @@ var width = $(document).width() - 10,
     height = $(document).height() - 78;
 
 var colors = ['#f6faaa','#FEE08B','#FDAE61','#F46D43','#D53E4F','#9E0142'];
-var colorScale = d3.scale.quantile()
-    .domain([0, 100])
-    .range(colors);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -25,6 +22,7 @@ function redraw() {
 d3.csv("user_data/uploadedFile.csv", function(links) {
   var nodesByName = {};
   var numberOfDomainsLinkingToDomainUpperBound = 0;
+  var domainAuthorityUpperBound = 0;
 
   // Create nodes for each unique source and target.
   links.forEach(function(link) {
@@ -33,7 +31,10 @@ d3.csv("user_data/uploadedFile.csv", function(links) {
     if (!(s in nodesByName)){
       nodesByName[s] = {'name': s, 'domain authority': link['Domain Authority'], 'number of domains linking to this page': link['Number of Domains Linking to this Page']}
       if (link['Number of Domains Linking to this Page'] > numberOfDomainsLinkingToDomainUpperBound){
-        numberOfDomainsLinkingToDomainUpperBound = link['Number of Domains Linking to this Page']
+        numberOfDomainsLinkingToDomainUpperBound = link['Number of Domains Linking to this Page'];
+      }
+      if (link['Domain Authority'] > domainAuthorityUpperBound){
+        domainAuthorityUpperBound = link['Domain Authority'];
       }
     }
     if (!(t in nodesByName)){
@@ -42,6 +43,13 @@ d3.csv("user_data/uploadedFile.csv", function(links) {
     link.source = nodesByName[s];
     link.target = nodesByName[t];
   });
+
+  numberOfDomainsLinkingToDomainUpperBound = Math.ceil(numberOfDomainsLinkingToDomainUpperBound / 10) * 10;
+  domainAuthorityUpperBound = Math.ceil(domainAuthorityUpperBound / 10) * 10;
+
+  var colorScale = d3.scale.quantile()
+      .domain([0, domainAuthorityUpperBound])
+      .range(colors);
 
   var sizeScale = d3.scale.linear()
     .domain([0, numberOfDomainsLinkingToDomainUpperBound])
