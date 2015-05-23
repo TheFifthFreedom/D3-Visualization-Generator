@@ -193,22 +193,54 @@ class GraphingServer(object):
         elif viz_type == 'linkscape':
             raise cherrypy.HTTPRedirect('/showLinkscape')
 
+        elif viz_type == 'visits':
+            raise cherrypy.HTTPRedirect('/showVisits')
+
 
     @cherrypy.expose
     def showChord(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
         return open(os.path.abspath('html/chord.html'))
 
     @cherrypy.expose
     def showSunburst(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
         return open(os.path.abspath('html/sunburst.html'))
 
     @cherrypy.expose
     def showCalendar(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
         return open(os.path.abspath('html/calendar.html'))
 
     @cherrypy.expose
     def showLinkscape(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
         return open(os.path.abspath('html/linkscape.html'))
+
+    @cherrypy.expose
+    def showVisits(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+            
+        return open(os.path.abspath('html/visits.html'))
 
     @cherrypy.expose
     def download(self, filepath):

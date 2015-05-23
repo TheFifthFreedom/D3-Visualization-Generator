@@ -1,0 +1,32 @@
+body {
+    font: 12px Arial;
+    -webkit-print-color-adjust: exact;
+}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+td, th {
+    padding: 1px 4px;
+}
+
+h3 {
+    text-align: center;
+}
+
+@media print {
+    #overhead {
+        display: none;
+    }
+}

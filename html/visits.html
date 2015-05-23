@@ -2,11 +2,10 @@
 <meta charset="utf-8">
 <html>
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+        <link rel="stylesheet" media="all" href="css/vendor/bootstrap_modified_for_printing.css">
         <link rel="stylesheet" href="css/header.css">
-        <link rel="stylesheet" type="text/css" href="css/sunburst.css"/>
-        <title>Sequences Sunburst</title>
+        <link rel="stylesheet" media="all" href="css/visits.css">
+        <title>Visits Report</title>
     </head>
 
     <body>
@@ -36,23 +35,15 @@
             </fieldset>
         </div>
 
-        <div id="main">
-            <div id="sequence"></div>
-            <div id="chart">
-                <div id="explanation" style="visibility: hidden;">
-                    <span id="percentage"></span><br/>
-                    of visits begin with this sequence of pages
-                </div>
-            </div>
-        </div>
-        <div id="sidebar">
-            <input type="checkbox" id="togglelegend">Legend<br/>
-            <div id="legend" style="visibility: hidden;"></div>
+        <h3>Google Algorithm Impact on SEO Traffic <span class="label label-default">SapientNitro</span></h3>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Highlights</div>
+            <div class="panel-body"><textarea class="form-control" rows="3"></textarea></div>
         </div>
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="js/header.js"></script>
-        <script src="js/sunburst.js"></script>
+        <script src="js/visits.js"></script>
     </body>
 </html>
