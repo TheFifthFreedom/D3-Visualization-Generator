@@ -10,13 +10,13 @@ d3.csv("user_data/headerFile.csv", function(error, csv) {
         }
         return d.Day;
     })
-    .rollup(function(d) { if (parseFloat(d[0].Cost.substring(d[0].Cost.indexOf('$') + 1)) > valueRange) {valueRange = parseFloat(d[0].Cost.substring(d[0].Cost.indexOf('$') + 1))};return d[0].Cost.trim(); })
+    .rollup(function(d) { if (parseFloat(d[0].Cost.replace(",", "").replace("'", "").trim()) > valueRange) {valueRange = parseFloat(d[0].Cost.replace(",", "").replace("'", "").trim());} return d[0].Cost.trim(); })
     .map(csv);
 
   visualize(yearRange, valueRange);
 
   rect.filter(function(d) { return d in data; })
-      .attr("class", function(d) { return "day " + color(data[d].substring(1)); })
+      .attr("class", function(d) { return "day " + color(parseFloat(data[d].replace(",", "").replace("'", "").trim())); })
     .select("title")
       .text(function(d) { return d + ": " + data[d]; });
 
@@ -68,13 +68,13 @@ var tooltip;
 
 function visualize(yearRange, valueRange){
 
-  var ceiling = Math.ceil(valueRange/100)*100
+  var ceiling = Math.ceil(valueRange/100)*100;
   var firstYear = Array.min(yearRange) + 2000;
   var lastYear = Array.max(yearRange) + 2001;
 
   color = d3.scale.quantize()
       .domain([0, ceiling])
-      .range(d3.range(10).map(function(d) { return "q" + d + "-10"; }));
+      .range(d3.range(9).map(function(d) { return "q" + d + "-10"; }));
 
   svg = d3.select("#chart").selectAll("svg")
       .data(d3.range(firstYear, lastYear))

@@ -30,16 +30,16 @@ text.active {
 }
 
 /* color ranges */
-.RdYlGn .q0-10{fill:rgb(228,232,103)}
-.RdYlGn .q1-10{fill:rgb(161,226,124)}
-.RdYlGn .q2-10{fill:rgb(101,213,154)}
-.RdYlGn .q3-10{fill:rgb(61,195,179)}
-.RdYlGn .q4-10{fill:rgb(74,172,191)}
-.RdYlGn .q5-10{fill:rgb(112,147,184)}
-.RdYlGn .q6-10{fill:rgb(141,121,161)}
-.RdYlGn .q7-10{fill:rgb(153,96,127)}
-.RdYlGn .q8-10{fill:rgb(153,96,127)}
-.RdYlGn .q9-10{fill:rgb(148,78,90)}
+.RdYlGn .q0-10{fill:rgb(255,255,204)}
+.RdYlGn .q1-10{fill:rgb(255,237,160)}
+.RdYlGn .q2-10{fill:rgb(254,217,118)}
+.RdYlGn .q3-10{fill:rgb(254,178,76)}
+.RdYlGn .q4-10{fill:rgb(253,141,60)}
+.RdYlGn .q5-10{fill:rgb(252,78,42)}
+.RdYlGn .q6-10{fill:rgb(227,26,28)}
+.RdYlGn .q7-10{fill:rgb(189,0,38)}
+.RdYlGn .q8-10{fill:rgb(128,0,38)}
+/*.RdYlGn .q9-10{fill:rgb(148,78,90)}*/
 
 /* hover info */
 #tooltip {

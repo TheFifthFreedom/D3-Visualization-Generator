@@ -33,7 +33,7 @@ class GraphingServer(object):
         #PID Validation (to make sure it's a valid PID)
         pidOK = True
         session = requests.Session()
-        session.auth = HttpNtlmAuth('sapient.com\\lmazou', 'Kus@n@g4', session)
+        session.auth = HttpNtlmAuth('sapient.com\\lmazou', 'Kus@n@g5', session)
         r1 = session.get('http://timetracking.sapient.com/')
 
         headers = {
@@ -59,7 +59,7 @@ class GraphingServer(object):
         pmOK = False
         pmEmail = ''
         s = Server('coloads1.sapient.com', port = 3268, get_info = ALL)
-        c = Connection(s, auto_bind = True, client_strategy = SYNC, user='SAPIENT\lmazou', password='Kus@n@g4', authentication=SIMPLE, check_names=True)
+        c = Connection(s, auto_bind = True, client_strategy = SYNC, user='SAPIENT\lmazou', password='Kus@n@g5', authentication=SIMPLE, check_names=True)
         c.search('OU=Employee Users,OU=Accounts,DC=sapient,DC=com','(cn=' + pmName + ')', SUBTREE, attributes = ['description', 'mail'])
         response = c.response
 
@@ -239,7 +239,7 @@ class GraphingServer(object):
         request_cookie = cherrypy.request.cookie
         if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
             raise cherrypy.HTTPRedirect('/index')
-            
+
         return open(os.path.abspath('html/visits.html'))
 
     @cherrypy.expose
