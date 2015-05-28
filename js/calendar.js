@@ -84,6 +84,28 @@ function visualize(yearRange, valueRange){
       .attr("class", "RdYlGn")
     .append("g")
 
+  // Legend
+  var colorArray = ['rgb(255,255,204)','rgb(255,237,160)','rgb(254,217,118)','rgb(254,178,76)','rgb(253,141,60)','rgb(252,78,42)','rgb(227,26,28)','rgb(189,0,38)','rgb(128,0,38)'];
+  svg.selectAll('rect')
+      .data(colorArray)
+    .enter().append('rect')
+      .attr('width', cellSize)
+      .attr('height', cellSize)
+      .attr('x',function(d,i){
+        return i*cellSize;
+      })
+      .attr('fill',function(d){
+        return d;
+      });
+  svg.append('text')
+    .attr('y', cellSize + 12)
+    .text('0');
+  svg.append('text')
+    .attr('text-anchor', 'end')
+    .attr('x', cellSize*9)
+    .attr('y', cellSize + 12)
+    .text(ceiling);
+
   rect = svg.selectAll(".day")
       .data(function(d) {
         return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1));
