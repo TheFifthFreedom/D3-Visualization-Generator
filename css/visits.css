@@ -29,4 +29,8 @@ h3 {
     #overhead {
         display: none;
     }
+
+    .emptyRow {
+        display: none;
+    }
 }

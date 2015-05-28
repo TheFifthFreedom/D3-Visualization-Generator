@@ -334,6 +334,17 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                 else {return false;}
             }).attr("class", "active");
 
+            // Exclude blank rows in print by adding a special class to those
+            $('tbody tr').each(function(i){
+                var empty = true;
+                $(this).children('td').each(function(j){
+                    if ($(this).text() != "" && j != 0 && j != 1){empty = false;}
+                })
+
+                if (empty){$(this).addClass("emptyRow");}
+                else {empty = true;}
+            });
+
             return table;
         }
         // render the table
