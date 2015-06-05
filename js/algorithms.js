@@ -16,7 +16,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
     });
 
     // Get the algorithm data
-    d3.csv("sample_data/visits_algorithms.csv", function(error, algoData) {
+    d3.csv("sample_data/google_algorithms.csv", function(error, algoData) {
         algoData.forEach(function(d) {
             d.date = parseDate(d.Date);
             d.close = d.Close;
@@ -221,12 +221,12 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                         }
                         else if (currentDateIndex != -1 && d.column == 'Day Before'){
                             currentPriorDataPoint = trafficData[trafficDates[currentDateIndex - 1]];
-                            if (currentPriorDataPoint) {d.value = currentPriorDataPoint; return currentPriorDataPoint;}
+                            if (currentPriorDataPoint) {d.value = currentPriorDataPoint; return numberWithCommas(currentPriorDataPoint);}
                             else {return undefined;}
                         }
                         else if (currentDateIndex != -1 && d.column == 'Day After'){
                             currentPostDataPoint = trafficData[trafficDates[currentDateIndex + 1]];
-                            if (currentPostDataPoint) {d.value = currentPostDataPoint; return currentPostDataPoint;}
+                            if (currentPostDataPoint) {d.value = currentPostDataPoint; return numberWithCommas(currentPostDataPoint);}
                             else {return undefined;}
                         }
                         else if (currentDateIndex != -1 && d.column == '4 day prior'){
@@ -237,7 +237,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPriorDataPoint = Math.round(currentPriorDataPoint / 4);
                                 d.value = currentPriorDataPoint;
-                                return currentPriorDataPoint;
+                                return numberWithCommas(currentPriorDataPoint);
                             }
                             else {
                                 return currentPriorDataPoint = undefined;
@@ -251,7 +251,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPostDataPoint = Math.round(currentPostDataPoint / 4);
                                 d.value = currentPostDataPoint;
-                                return currentPostDataPoint;
+                                return numberWithCommas(currentPostDataPoint);
                             }
                             else {
                                 return currentPostDataPoint = undefined;
@@ -265,7 +265,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPriorDataPoint = Math.round(currentPriorDataPoint / 9);
                                 d.value = currentPriorDataPoint;
-                                return currentPriorDataPoint;
+                                return numberWithCommas(currentPriorDataPoint);
                             }
                             else {
                                 return currentPriorDataPoint = undefined;
@@ -279,7 +279,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPostDataPoint = Math.round(currentPostDataPoint / 9);
                                 d.value = currentPostDataPoint;
-                                return currentPostDataPoint;
+                                return numberWithCommas(currentPostDataPoint);
                             }
                             else {
                                 return currentPostDataPoint = undefined;
@@ -293,7 +293,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPriorDataPoint = Math.round(currentPriorDataPoint / 20);
                                 d.value = currentPriorDataPoint;
-                                return currentPriorDataPoint;
+                                return numberWithCommas(currentPriorDataPoint);
                             }
                             else{
                                 return currentPriorDataPoint = undefined;
@@ -307,7 +307,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPostDataPoint = Math.round(currentPostDataPoint / 20);
                                 d.value = currentPostDataPoint;
-                                return currentPostDataPoint;
+                                return numberWithCommas(currentPostDataPoint);
                             }
                             else{
                                 return currentPostDataPoint = undefined;
@@ -351,3 +351,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
         var peopleTable = tabulate(algoData, ["Date", "Algorithm", "Day Before", "Day After", "Change", "4 day prior", "4 day post", "Change", "9 day prior", "9 day post", "Change", "20 day prior", "20 day post", "Change"]);
     });
 });
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

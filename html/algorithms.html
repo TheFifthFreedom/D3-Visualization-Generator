@@ -4,8 +4,8 @@
     <head>
         <link rel="stylesheet" media="all" href="css/vendor/bootstrap_modified_for_printing.css">
         <link rel="stylesheet" href="css/header.css">
-        <link rel="stylesheet" media="all" href="css/visits.css">
-        <title>Visits Report</title>
+        <link rel="stylesheet" media="all" href="css/algorithms.css">
+        <title>Google Algorithms Impact Report</title>
     </head>
 
     <body>
@@ -27,7 +27,7 @@
                         <option value="sunburst" data-title="Instructions" data-content="This requires the Top Conversion Paths CSV export from Google Analytics, which you can get by navigating via the GA left-hand side menu to Conversions > Multi-Channel Funnels > Top Conversion Paths">Sequences Sunburst</option>
                         <option value="calendar" data-title="Instructions" data-content="This requires a CSV file with just two untitled columns: the first should contain one date in each row in the format M/D/YYYY, and the second should contain any numerical value you want to track.">Calendar View</option>
                         <option value="linkscape" data-title="Instructions" data-content="This requires a CSV file modeled after moz' advanced inbound links report - it expects at least two columns: one of them named 'Source' and another named 'Target', each containing whatever you want. If you wish to add further dimensions, adding a 'Domain Authority' column will impact the nodes' colors, while adding a 'Number of Domains Linking to this Page' column will impact the nodes' sizes. Check the sample file if you're unsure.">LinkScape</option>
-                        <option value="visits" data-title="Instructions" data-content="This requires a CSV file with two titled columns: the first should be called 'Date' and each row should follow the format d-Mmm-yy (ex: 1-Oct-13). The second one should be called 'Visits' and contain the number of visits to the site you're studying for each date.">Visits Report</option>
+                        <option value="algorithms" data-title="Instructions" data-content="This requires a CSV file with two titled columns: the first should be called 'Date' and each row should follow the format d-Mmm-yy (ex: 1-Oct-13). The second one should be called 'Visits' and contain the number of visits to the site you're studying for each date.">Algorithms Impact Report</option>
                     </select>
                     <input id="btn-submit" class="btn btn-default" type="submit" value="Submit" disabled="disabled">
                     <button id="btn-download" type="button" class="btn btn-success">Download SVG</button>
@@ -35,7 +35,15 @@
             </fieldset>
         </div>
 
-        <h3>Google Algorithm Impact on SEO Traffic <span class="label label-default">SapientNitro</span></h3>
+        <div id="title">
+            <img src="images/SN_LockUp_Positive.png" alt="Sapient Logo"></img>
+            <div class="input-group" id="client">
+                <span class="input-group-addon" id="basic-addon2">Client</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon2">
+            </div>
+            <h3>Google Algorithms Impact on SEO Traffic</h3>
+        </div>
+
         <div class="panel panel-primary">
             <div class="panel-heading">Highlights</div>
             <div class="panel-body"><textarea class="form-control" rows="3"></textarea></div>
@@ -44,6 +52,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="js/header.js"></script>
-        <script src="js/visits.js"></script>
+        <script src="js/algorithms.js"></script>
     </body>
 </html>

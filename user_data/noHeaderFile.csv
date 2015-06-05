@@ -1,132 +1,115 @@
 MCF Channel Grouping Path,Conversions,Conversion Value
-Organic Search > Direct,259,$0.00
-Paid Search > Paid Search,161,$0.00
-Organic Search > Paid Search,97,$0.00
-Organic Search > Organic Search,89,$0.00
-Paid Search > Direct,80,$0.00
-Paid Search > Organic Search,67,$0.00
-Direct > Direct,66,$0.00
-Organic Search > Direct > Direct,53,$0.00
-Direct > Paid Search,42,$0.00
-Paid Search > Paid Search > Paid Search,27,$0.00
-Direct > Organic Search,22,$0.00
-Direct > Direct > Direct,19,$0.00
-Organic Search > Direct > Direct > Direct,16,$0.00
-Paid Search > Direct > Direct,15,$0.00
-Organic Search > Organic Search > Direct,14,$0.00
-Organic Search > Paid Search > Paid Search,12,$0.00
-Organic Search > Direct > Organic Search,10,$0.00
-Organic Search > Organic Search > Organic Search,10,$0.00
-Paid Search > Organic Search > Paid Search,6,$0.00
-Organic Search > Paid Search > Organic Search,6,$0.00
-Paid Search > Paid Search > Paid Search > Paid Search,5,$0.00
-Paid Search > Paid Search > Organic Search,5,$0.00
-Direct > Direct > Direct > Direct,5,$0.00
-Direct > Direct > Organic Search,5,$0.00
-Social Network > Direct,5,$0.00
-Paid Search > Paid Search > Direct,4,$0.00
-Paid Search > Organic Search > Direct,4,$0.00
-Direct > (unavailable),4,$0.00
-Organic Search > Direct > Direct > Direct > Direct,4,$0.00
-Social Network > Direct > Direct,4,$0.00
-Paid Search > Direct > Paid Search,3,$0.00
-Paid Search > Direct > Direct > Direct,3,$0.00
-Paid Search > Paid Search > Paid Search > Direct,3,$0.00
-Paid Search > Organic Search > Paid Search > Paid Search,3,$0.00
-Direct > Paid Search > Paid Search,3,$0.00
-Direct > Organic Search > Direct > Direct,3,$0.00
-Organic Search > Direct > Paid Search,3,$0.00
-Organic Search > Direct > Direct > Organic Search,3,$0.00
-Organic Search > Paid Search > Direct,3,$0.00
-Organic Search > Organic Search > Paid Search,3,$0.00
-Social Network > Social Network,3,$0.00
-Paid Search > Direct > Direct > Paid Search,2,$0.00
-Paid Search > Direct > Organic Search,2,$0.00
-Paid Search > Organic Search > Organic Search,2,$0.00
-Direct > Direct > Direct > Paid Search,2,$0.00
-Direct > Direct > Direct > Direct > Direct,2,$0.00
-Direct > Direct > Direct > Direct > Direct > Direct,2,$0.00
-Direct > Paid Search > Direct,2,$0.00
-Direct > Paid Search > Direct > Direct,2,$0.00
-Direct > Organic Search > Paid Search,2,$0.00
-Direct > Organic Search > Direct,2,$0.00
-Email > Direct,2,$0.00
-Email > Organic Search,2,$0.00
-Organic Search > Direct > Direct > Organic Search > Direct,2,$0.00
-Organic Search > Direct > Organic Search > Direct > Direct,2,$0.00
-Organic Search > Paid Search > Paid Search > Paid Search,2,$0.00
-Organic Search > Paid Search > Organic Search > Direct > Direct,2,$0.00
-Organic Search > Organic Search > Organic Search > Direct,2,$0.00
-Social Network > Paid Search,2,$0.00
-Paid Search > Direct > Paid Search > Paid Search,1,$0.00
-Paid Search > Direct > Paid Search > Organic Search,1,$0.00
-Paid Search > Direct > Direct > Direct > Direct,1,$0.00
-Paid Search > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Paid Search > Direct > Direct > Direct > Direct > Direct > Direct > Organic Search,1,$0.00
-Paid Search > Direct > Direct > Organic Search,1,$0.00
-Paid Search > Direct > Direct > Organic Search > Direct,1,$0.00
-Paid Search > Direct > Organic Search > Direct > Direct,1,$0.00
-Paid Search > Paid Search > Direct > Direct,1,$0.00
-Paid Search > Paid Search > Direct > Paid Search,1,$0.00
-Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Direct > Direct > Paid Search > Paid Search > Paid Search > Paid Search > Organic Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Organic Search > Direct > Direct,1,$0.00
-Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Direct > Direct > Paid Search > Paid Search > Paid Search > Paid Search > Organic Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Direct > Paid Search > Paid Search > Organic Search > Direct > Direct > Direct,1,$0.00
-Paid Search > Paid Search > Paid Search > Direct > Direct > Paid Search > Direct > Paid Search > Paid Search,1,$0.00
-Paid Search > Paid Search > Organic Search > Paid Search,1,$0.00
-Paid Search > Paid Search > Organic Search > Direct,1,$0.00
-Paid Search > Organic Search > Direct > Direct > Direct,1,$0.00
-Paid Search > Organic Search > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Paid Search > Organic Search > Direct > Paid Search > Direct,1,$0.00
-Paid Search > Organic Search > Paid Search > Paid Search > Organic Search,1,$0.00
-Paid Search > Organic Search > Paid Search > Paid Search > Organic Search > Paid Search,1,$0.00
-Paid Search > Organic Search > Paid Search > Paid Search > Organic Search > Paid Search > Paid Search,1,$0.00
-Paid Search > Organic Search > Paid Search > Paid Search > Organic Search > Paid Search > Paid Search > Direct > Direct,1,$0.00
-Paid Search > Organic Search > Paid Search > Direct > Paid Search > Paid Search > Paid Search > Paid Search,1,$0.00
-Paid Search > Organic Search > Paid Search > Organic Search > Paid Search > Paid Search,1,$0.00
-(unavailable) > Direct,1,$0.00
-(unavailable) > Direct > Direct,1,$0.00
-Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Direct > Direct > Direct > Direct > Paid Search,1,$0.00
-Direct > Direct > Direct > Organic Search,1,$0.00
-Direct > Direct > Paid Search,1,$0.00
-Direct > Direct > Organic Search > Direct,1,$0.00
-Direct > Direct > Social Network,1,$0.00
-Direct > Paid Search > Organic Search > Direct,1,$0.00
-Direct > Organic Search > Paid Search > Direct > Paid Search,1,$0.00
-Direct > Social Network,1,$0.00
-Email > Direct > Organic Search,1,$0.00
-Organic Search > (unavailable),1,$0.00
-Organic Search > (unavailable) > Organic Search,1,$0.00
-Organic Search > Direct > Paid Search > Paid Search > Organic Search,1,$0.00
-Organic Search > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$0.00
-Organic Search > Direct > Direct > Direct > Organic Search,1,$0.00
-Organic Search > Direct > Direct > Direct > Organic Search > Direct,1,$0.00
-Organic Search > Direct > Direct > Paid Search,1,$0.00
-Organic Search > Direct > Direct > Organic Search > Direct > Direct,1,$0.00
-Organic Search > Direct > Organic Search > Direct,1,$0.00
-Organic Search > Direct > Organic Search > Direct > Direct > Direct > Paid Search,1,$0.00
-Organic Search > Direct > Organic Search > Direct > Organic Search > Organic Search,1,$0.00
-Organic Search > Paid Search > Direct > Direct,1,$0.00
-Organic Search > Paid Search > Direct > Direct > Direct,1,$0.00
-Organic Search > Paid Search > Direct > Direct > Organic Search,1,$0.00
-Organic Search > Paid Search > Direct > Organic Search,1,$0.00
-Organic Search > Paid Search > Paid Search > Paid Search > Direct,1,$0.00
-Organic Search > Paid Search > Paid Search > Paid Search > Paid Search,1,$0.00
-Organic Search > Paid Search > Paid Search > Direct,1,$0.00
-Organic Search > Paid Search > Paid Search > Direct > Direct,1,$0.00
-Organic Search > Paid Search > Paid Search > Organic Search,1,$0.00
-Organic Search > Paid Search > Paid Search > Organic Search > Direct,1,$0.00
-Organic Search > Paid Search > Paid Search > Organic Search > Paid Search > Paid Search,1,$0.00
-Organic Search > Paid Search > Organic Search > Organic Search,1,$0.00
-Organic Search > Paid Search > Organic Search > Organic Search > Direct,1,$0.00
-Organic Search > Organic Search > Direct > Direct > Direct > Direct,1,$0.00
-Organic Search > Organic Search > Direct > Organic Search,1,$0.00
-Organic Search > Organic Search > Direct > Organic Search > Direct,1,$0.00
-Organic Search > Organic Search > Organic Search > Direct > Direct > Direct,1,$0.00
-Organic Search > Organic Search > Organic Search > Organic Search > Organic Search > Paid Search,1,$0.00
-Social Network > Social Network > Direct,1,$0.00
-,"1,255",$0.00
+Direct > Direct,22,"$5,344.69"
+Organic Search > Direct,13,"$3,775.17"
+Paid Search > Direct,11,"$2,688.20"
+Direct > Direct > Direct,9,"$4,086.55"
+Organic Search > Direct > Direct,8,"$1,769.62"
+Organic Search > Organic Search,8,"$1,646.54"
+Paid Search > Organic Search,7,"$1,096.34"
+Organic Search > Direct > Direct > Direct > Direct,7,"$1,712.51"
+Paid Search > Direct > Direct,4,$572.30
+Paid Search > Paid Search,4,$589.83
+Organic Search > Direct > Direct > Direct,4,$867.71
+Paid Search > Direct > Direct > Direct,3,$915.03
+Direct > Direct > Direct > Direct,3,$502.81
+Direct > Paid Search,3,$523.83
+Direct > Organic Search,3,$969.95
+(unavailable) > Direct,3,$252.18
+Organic Search > Paid Search,3,$971.94
+Organic Search > Organic Search > Direct,3,$213.79
+Paid Search > Organic Search > Direct,2,$257.08
+Paid Search > Organic Search > Organic Search,2,$512.00
+Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,2,$687.95
+(unavailable) > Organic Search,2,$159.12
+Referral > Direct,2,$326.87
+Paid Search > (unavailable),1,$244.40
+Paid Search > (unavailable) > (unavailable) > Direct > Direct,1,$225.00
+Paid Search > (unavailable) > Organic Search > Direct > Direct > Direct,1,$200.00
+Paid Search > Direct > Paid Search > Direct,1,$223.00
+Paid Search > Direct > Paid Search > Paid Search,1,$275.00
+Paid Search > Direct > Paid Search > Paid Search > Direct > Direct,1,$59.49
+Paid Search > Direct > Paid Search > Organic Search > Organic Search > Paid Search > Organic Search > Organic Search > Paid Search > Direct,1,$238.50
+Paid Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$203.98
+Paid Search > Direct > Direct > Direct > Paid Search > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Paid Search,1,$138.00
+Paid Search > Direct > Organic Search,1,$175.00
+Paid Search > Direct > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$240.75
+Paid Search > Email > Email,1,$497.00
+Paid Search > Paid Search > Direct,1,$128.80
+Paid Search > Paid Search > Direct > Direct > Direct > Email > Direct > Organic Search > Direct > Email > Direct > Direct > Organic Search,1,$57.49
+Paid Search > Paid Search > Paid Search,1,$55.00
+Paid Search > Organic Search > Direct > Direct,1,$51.44
+Paid Search > Organic Search > Direct > Direct > Direct,1,$36.85
+Paid Search > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$105.64
+Paid Search > Organic Search > Organic Search > Organic Search > (unavailable),1,$316.63
+Direct > (unavailable) > Direct,1,$178.00
+Direct > Direct > Direct > Direct > Direct,1,$190.75
+Direct > Direct > Direct > Direct > Direct > Direct,1,$712.41
+Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > (unavailable) > Direct > Direct > Direct > Direct,1,$388.00
+Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Email > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Email > Direct > Direct > Direct > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Referral > Direct > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$224.70
+Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Paid Search > Direct > Direct > Direct > Direct,1,$62.00
+Direct > Direct > Direct > Direct > Direct > Direct > Direct > Email,1,"$3,200.92"
+Direct > Direct > Direct > Direct > Direct > Direct > Email > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$148.00
+Direct > Direct > Direct > Direct > Direct > Direct > Organic Search > Direct > Organic Search > Direct,1,$42.40
+Direct > Direct > Direct > Direct > Direct > Email > Direct > Direct > Direct > Direct,1,$107.78
+Direct > Direct > Direct > Direct > Direct > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Organic Search,1,$180.00
+Direct > Direct > Direct > Direct > Email,1,$131.60
+Direct > Direct > Direct > Organic Search > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct,1,$736.00
+Direct > Direct > Email > Email > Direct,1,$92.02
+Direct > Direct > Paid Search > Organic Search > Organic Search,1,$65.88
+Direct > Email,1,$124.00
+Direct > Email > (unavailable) > Email,1,$90.03
+Direct > Referral,1,$75.00
+Direct > Paid Search > Organic Search > Paid Search > Organic Search > Direct > Paid Search > Direct > Direct > Direct > Direct,1,$267.50
+Direct > Organic Search > Direct > Direct > Direct,1,$41.92
+Direct > Organic Search > (unavailable) > Direct > Direct,1,$94.61
+Direct > Social Network,1,$80.00
+(unavailable) > Direct > Direct > Direct > Organic Search,1,$275.00
+(unavailable) > Paid Search > (unavailable),1,$49.00
+(unavailable) > Organic Search > (unavailable) > (unavailable) > Direct > Direct,1,$157.14
+Email > Direct > Direct,1,$41.32
+Email > Direct > Direct > Direct > Direct > Direct,1,$92.34
+Email > Direct > Direct > Direct > Email > Email,1,$173.96
+Email > Direct > Direct > Email > Direct > Direct > Direct > Direct > Email,1,$98.10
+Email > Direct > Email,1,$65.27
+Email > Direct > Organic Search,1,$42.12
+Email > Email > Direct > Direct,1,$138.60
+Email > Email > Direct > Direct > Organic Search,1,$332.45
+Email > Email > Email > Direct > Email > Email > Direct,1,$74.12
+Email > Organic Search,1,$58.85
+Referral > Direct > Direct > Direct,1,$295.00
+Referral > Direct > Direct > Direct > Direct > Direct > Direct,1,$94.16
+Referral > Direct > Organic Search > Direct,1,$310.00
+Referral > Direct > Organic Search > Referral > Referral > Organic Search > Referral,1,$609.69
+Referral > Referral,1,$198.00
+Referral > Organic Search > Organic Search,1,$212.50
+Referral > Social Network,1,$64.80
+Organic Search > (unavailable) > Direct > Direct,1,$582.00
+Organic Search > (unavailable) > Direct > Direct > Direct > Direct > Direct,1,$89.21
+Organic Search > (unavailable) > (unavailable) > (unavailable) > (unavailable),1,$180.00
+Organic Search > (unavailable) > Organic Search,1,$268.46
+Organic Search > Direct > Paid Search,1,$63.73
+Organic Search > Direct > Direct > (unavailable),1,$55.00
+Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$240.75
+Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$60.60
+Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$58.15
+Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Paid Search > Direct > Organic Search > Direct > Direct,1,$266.00
+Organic Search > Direct > Direct > Direct > Direct > Email,1,$67.67
+Organic Search > Direct > Direct > Email,1,$63.00
+Organic Search > Direct > Direct > Email > Direct,1,$69.76
+Organic Search > Paid Search > (unavailable),1,$59.88
+Organic Search > Paid Search > (unavailable) > (unavailable) > (unavailable) > Paid Search > Direct > Direct > Referral > Direct > Paid Search,1,$160.50
+Organic Search > Paid Search > (unavailable) > Organic Search,1,$408.42
+Organic Search > Paid Search > Direct,1,$195.88
+Organic Search > Paid Search > Direct > Direct > Direct,1,$247.50
+Organic Search > Paid Search > Paid Search,1,$454.75
+Organic Search > Paid Search > Organic Search > Paid Search,1,$168.00
+Organic Search > Organic Search > Direct > Direct > Direct,1,$97.98
+Organic Search > Organic Search > Direct > Direct > Direct > Direct > Direct > Direct > Direct > Direct,1,$150.00
+Organic Search > Organic Search > Direct > Direct > Direct > Organic Search > Direct,1,$244.97
+Organic Search > Organic Search > Direct > Organic Search > Direct > Organic Search > Direct,1,$106.82
+Organic Search > Organic Search > Direct > Organic Search > Direct > Organic Search > Direct > Direct,1,$155.00
+Organic Search > Organic Search > Email,1,$178.46
+Organic Search > Organic Search > Organic Search,1,$415.16
+Organic Search > Organic Search > Organic Search > Direct > Organic Search > Direct,1,$77.34
+,217,"$49,714.91"
 

@@ -21,8 +21,29 @@ td, th {
     padding: 1px 4px;
 }
 
+#title {
+    width: 100%;
+}
+
 h3 {
     text-align: center;
+}
+
+img {
+    float: left;
+    position: relative;
+    left: 5px;
+    bottom: 5px;
+    width: 166.5px;
+    height: 39px;
+}
+
+#client {
+    float: right;
+    position: relative;
+    right: 5px;
+    bottom: 5px;
+    width: 166.5px;
 }
 
 @media print {

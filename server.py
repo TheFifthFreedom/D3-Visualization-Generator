@@ -193,8 +193,8 @@ class GraphingServer(object):
         elif viz_type == 'linkscape':
             raise cherrypy.HTTPRedirect('/showLinkscape')
 
-        elif viz_type == 'visits':
-            raise cherrypy.HTTPRedirect('/showVisits')
+        elif viz_type == 'algorithms':
+            raise cherrypy.HTTPRedirect('/showAlgorithms')
 
 
     @cherrypy.expose
@@ -234,13 +234,13 @@ class GraphingServer(object):
         return open(os.path.abspath('html/linkscape.html'))
 
     @cherrypy.expose
-    def showVisits(self):
+    def showAlgorithms(self):
         # Checking to see if the cookie is still there
         request_cookie = cherrypy.request.cookie
         if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
             raise cherrypy.HTTPRedirect('/index')
 
-        return open(os.path.abspath('html/visits.html'))
+        return open(os.path.abspath('html/algorithms.html'))
 
     @cherrypy.expose
     def download(self, filepath):
@@ -248,7 +248,8 @@ class GraphingServer(object):
 
 if __name__ == '__main__':
 
-    config = {'/':
+    config = {
+        '/':
             {
                 'tools.staticdir.on' : True,
                 'tools.staticdir.root' : os.path.abspath(os.curdir),
@@ -268,6 +269,11 @@ if __name__ == '__main__':
             {
                 'tools.staticdir.on' : True,
                 'tools.staticdir.dir' : 'css'
+            },
+        '/favicon.ico':
+            {
+                'tools.staticfile.on': True,
+                'tools.staticfile.filename': '/images/favicon.ico'
             },
         'global':
             {
