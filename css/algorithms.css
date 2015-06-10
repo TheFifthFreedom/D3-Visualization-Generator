@@ -46,6 +46,10 @@ img {
     width: 166.5px;
 }
 
+#brand{
+    text-align: right;
+}
+
 @media print {
     #overhead {
         display: none;

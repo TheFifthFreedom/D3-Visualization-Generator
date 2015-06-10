@@ -307,9 +307,22 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPostDataPoint = Math.round(currentPostDataPoint / 20);
                                 d.value = currentPostDataPoint;
-                                return numberWithCommas(currentPostDataPoint);
+
+                                // Reset all values at the end of the line
+                                currentDate = '';
+                                currentDateIndex = 0;
+                                currentPriorDataPoint = 0;
+                                currentPostDataPoint = 0;
+
+                                return numberWithCommas(d.value);
                             }
                             else{
+                                // Reset all values at the end of the line
+                                currentDate = '';
+                                currentDateIndex = 0;
+                                currentPriorDataPoint = 0;
+                                currentPostDataPoint = 0;
+
                                 return currentPostDataPoint = undefined;
                             }
                         }
