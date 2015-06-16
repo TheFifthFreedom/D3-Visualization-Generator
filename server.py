@@ -196,6 +196,9 @@ class GraphingServer(object):
         elif viz_type == 'algorithms':
             raise cherrypy.HTTPRedirect('/showAlgorithms')
 
+        elif viz_type == 'wordcloud':
+            raise cherrypy.HTTPRedirect('/showWordcloud')
+
 
     @cherrypy.expose
     def showChord(self):
@@ -241,6 +244,15 @@ class GraphingServer(object):
             raise cherrypy.HTTPRedirect('/index')
 
         return open(os.path.abspath('html/algorithms.html'))
+
+    @cherrypy.expose
+    def showWordcloud(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
+        return open(os.path.abspath('html/wordcloud.html'))
 
     @cherrypy.expose
     def download(self, filepath):
