@@ -185,6 +185,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                 currentDateIndex,
                 currentPriorDataPoint,
                 currentPostDataPoint;
+            var endOfRow = false;
 
             // create a cell in each row for each column
             var cells = rows.selectAll("td")
@@ -207,6 +208,18 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                         }
                         else if (d.column == 'Change'){
                             var diff = Math.round(((currentPostDataPoint - currentPriorDataPoint) / currentPriorDataPoint)*100);
+
+                            if (endOfRow){
+                                // Reset all values since we reached the end of the row
+                                // to avoid carryovers of Change value in potential
+                                // subsequent blank lines
+                                currentDate = '';
+                                currentDateIndex = 0;
+                                currentPriorDataPoint = 0;
+                                currentPostDataPoint = 0;
+                                endOfRow = false;
+                            }
+
                             if (diff > 0){
                                 d.value = diff;
                                 return '+' + diff + '%';
@@ -300,6 +313,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                             }
                         }
                         else if (currentDateIndex != -1 && d.column == '20 day post'){
+                            endOfRow = true;
                             if (trafficData[trafficDates[currentDateIndex + 20]]){
                                 currentPostDataPoint = 0;
                                 for (var i = 1; i < 21; i++){
@@ -307,22 +321,9 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
                                 }
                                 currentPostDataPoint = Math.round(currentPostDataPoint / 20);
                                 d.value = currentPostDataPoint;
-
-                                // Reset all values at the end of the line
-                                currentDate = '';
-                                currentDateIndex = 0;
-                                currentPriorDataPoint = 0;
-                                currentPostDataPoint = 0;
-
-                                return numberWithCommas(d.value);
+                                return numberWithCommas(currentPostDataPoint);
                             }
                             else{
-                                // Reset all values at the end of the line
-                                currentDate = '';
-                                currentDateIndex = 0;
-                                currentPriorDataPoint = 0;
-                                currentPostDataPoint = 0;
-
                                 return currentPostDataPoint = undefined;
                             }
                         }
