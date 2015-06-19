@@ -285,12 +285,12 @@ if __name__ == '__main__':
         '/favicon.ico':
             {
                 'tools.staticfile.on': True,
-                'tools.staticfile.filename': '/images/favicon.ico'
+                'tools.staticfile.filename': os.path.abspath(os.curdir) + '/images/favicon.ico'
             },
         'global':
             {
                 'server.socket_host' : '0.0.0.0',
-                'server.socket_port': 8080
+                'server.socket_port': 80
             }
     }
     cherrypy.quickstart(GraphingServer(), '/', config)
