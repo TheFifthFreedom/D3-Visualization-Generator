@@ -27,7 +27,7 @@ $('select').on('change', function(){
         trigger: 'focus',
         placement: 'bottom',
         title: function(){return $(this).children('option:selected').attr("data-title");},
-        content: function(){return $(this).children('option:selected').attr("data-content") + "<br><a href='/download/" + $(this).children('option:selected').attr('value') + "_sample.csv' download>Download sample</a>";} //this
+        content: function(){return '<img src="images/' + $(this).children('option:selected').attr('value') + '_thumbnail.png" alt="thumbnail" height="200" width="200" style="margin-left:22px"><br>' + $(this).children('option:selected').attr("data-content") + "<br><a href='/download/" + $(this).children('option:selected').attr('value') + "_sample.csv' download>Download sample</a>";} //this
     }).popover('show');
 });
 
