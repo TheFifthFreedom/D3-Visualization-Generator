@@ -6,10 +6,9 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
         <link rel="stylesheet" href="css/header.css">
-        <link rel="stylesheet" type="text/css" href="css/sunburst.css"/>
-        <title>Sequences Sunburst</title>
+        <link rel="stylesheet" href="css/topography.css">
+        <title>Content Topography</title>
     </head>
 
     <body>
@@ -41,23 +40,23 @@
             </fieldset>
         </div>
 
-        <div id="main">
-            <div id="sequence"></div>
-            <div id="chart">
-                <div id="explanation" style="visibility: hidden;">
-                    <span id="percentage"></span><br/>
-                    of visits begin with this sequence of pages
-                </div>
-            </div>
-        </div>
-        <div id="sidebar">
-            <input type="checkbox" id="togglelegend">Legend<br/>
-            <div id="legend" style="visibility: hidden;"></div>
-        </div>
+        <div id="container_pehomu"></div>
+        <div id="legend"></div>
+        <div class="instructions">[Drag with mouse to move/rotate; mouse wheel to zoom; right-drag to pan]</div>
+
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://jnuno.com/tree-model-js/vendor/jnuno/TreeModel-min.js"></script>
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://modernizr.com/downloads/modernizr-latest.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+        <script src="http://www.billdwhite.com/wordpress/wp-content/js/threejs/examples/js/controls/TrackballControls.js"></script>
+        <script src="http://www.billdwhite.com/wordpress/wp-content/js/threejs/examples/js/controls/OrbitControls.js"></script>
+        <script src="http://www.billdwhite.com/wordpress/wp-content/js/threejs/examples/js/renderers/CanvasRenderer.js"></script>
+        <script src="http://www.billdwhite.com/wordpress/wp-content/js/threejs/examples/js/controls/TrackballControls.js"></script>
+        <script src="http://projects.delimited.io/experiments/d3-threejs/lib/tween.js"></script>
         <script src="js/header.js"></script>
-        <script src="js/sunburst.js"></script>
+        <script src="js/topography.js"></script>
     </body>
 </html>

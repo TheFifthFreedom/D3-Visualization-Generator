@@ -1,0 +1,67 @@
+body {
+  font-family: "Arial";
+  margin: auto;
+  position: relative;
+  padding: 5px;
+  height: 100%;
+  background-color: #FFFFFF;
+}
+
+.node {
+  border: solid 1px white;
+  line-height: 0.95;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 6px;
+  background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+  background-image: -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+  background-image: -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+  background-image: -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+  background-image: linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+  text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px 1px 2px hsla(0,0%,100%,0.25),
+        1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px 0px 2px hsla(0,0%,100%,0.25),
+        1px 0px 2px hsla(0,0%,100%,0.25);
+}
+
+.node div {
+  padding: 6px 4%;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.controls button {
+  width: 120px;
+  height: 20px;
+  margin: 1px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: "Arial";
+  color: #333333;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  border: 1px solid #999999;
+}
+
+.instructions {
+  position: fixed;
+  color: #000000;
+  bottom: 0;
+  right: -35px;
+  z-index: 10;
+  font-size: 11px;
+  font-family: "Arial";
+  color: #777777;
+  width: 400px;
+}
+
+#legend {
+    position: fixed;
+}
