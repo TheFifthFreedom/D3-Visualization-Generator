@@ -129,3 +129,11 @@ d3.csv("user_data/uploadedFile.csv", function(links) {
     return nodesByName[name] || (nodesByName[name] = {name: name});
   }
 });
+
+// SVG Download
+$('#btn-download').on('click', function(){
+    var e = document.createElement('script');
+    e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
+    e.setAttribute('class', 'svg-crowbar');
+    document.body.appendChild(e);
+});

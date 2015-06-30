@@ -369,3 +369,7 @@ d3.csv("user_data/uploadedFile.csv", function(error, inputData){
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+$('#btn-download').on('click', function(){
+    window.print();
+});

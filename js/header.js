@@ -5,12 +5,6 @@ $(document).on('change', '.btn-file :file', function() {
     input.trigger('fileselect', [numFiles, label]);
 });
 
-$('#btn-download').popover({
-    trigger: 'hover',
-    placement: 'right',
-    content: 'Only works in Chrome!',
-});
-
 $('select').on('change', function(){
     var filename = $('.btn-file > input').val();
     var visualization = $('select').val();
@@ -54,13 +48,6 @@ $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
         if( log ) alert(log);
     }
 
-});
-
-$('#btn-download').on('click', function(){
-    var e = document.createElement('script');
-    e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
-    e.setAttribute('class', 'svg-crowbar');
-    document.body.appendChild(e);
 });
 
 $(document.body).on('click', '.svg-crowbar > .svg-crowbar > button', function(){
