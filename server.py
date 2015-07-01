@@ -202,6 +202,9 @@ class GraphingServer(object):
         elif viz_type == 'topography':
             raise cherrypy.HTTPRedirect('/showTopography')
 
+        elif viz_type == 'treemap':
+            raise cherrypy.HTTPRedirect('/showTreemap')
+
 
     @cherrypy.expose
     def showChord(self):
@@ -265,6 +268,15 @@ class GraphingServer(object):
             raise cherrypy.HTTPRedirect('/index')
 
         return open(os.path.abspath('html/topography.html'))
+
+    @cherrypy.expose
+    def showTreemap(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
+        return open(os.path.abspath('html/treemap.html'))
 
     @cherrypy.expose
     def download(self, filepath):

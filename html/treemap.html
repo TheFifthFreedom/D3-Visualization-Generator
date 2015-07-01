@@ -7,15 +7,14 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/header.css">
-        <link rel="stylesheet" href="css/linkscape.css">
-        <title>LinkScape</title>
+        <link rel="stylesheet" href="css/treemap.css">
+        <title>Treemap</title>
     </head>
 
     <body>
         <div id="overhead">
             <fieldset>
                 <form class="form-inline" action="upload" method="post" enctype="multipart/form-data">
-                    <!-- <input type="file" name="input_file"></input> -->
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-primary btn-file">
@@ -41,11 +40,14 @@
             </fieldset>
         </div>
 
+        <div id="body"></div>
+
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+        <script src="http://jnuno.com/tree-model-js/vendor/jnuno/TreeModel-min.js"></script>
         <script src="js/header.js"></script>
-        <script src="js/linkscape.js"></script>
+        <script src="js/treemap.js"></script>
     </body>
 </html>
