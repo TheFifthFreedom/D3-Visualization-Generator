@@ -13,11 +13,23 @@ demo.Treemap3d = function() {
         _camera         = new THREE.PerspectiveCamera(45, _width/_height , 1, 100000),
         _zmetric        = "social",
         _colorScale     = d3.scale.category10(),
+        _colorShades    = {},
         _zscaleSocial   = d3.scale.linear().range([0,1000]),
         _zscaleCompetition = d3.scale.linear().range([0,1000]),
         _buttonBarDiv   = null,
         _elements       = null,
         _boxMap         = {};
+
+        _colorShades['#1f77b4'] = d3.scale.linear().domain([0, 1]).range(['#1F77B4','#FFFFFF']);
+        _colorShades['#ff7f0e'] = d3.scale.linear().domain([0, 1]).range(['#FF7F0E','#FFFFFF']);
+        _colorShades['#2ca02c'] = d3.scale.linear().domain([0, 1]).range(['#2CA02C','#FFFFFF']);
+        _colorShades['#d62728'] = d3.scale.linear().domain([0, 1]).range(['#D62728','#FFFFFF']);
+        _colorShades['#9467bd'] = d3.scale.linear().domain([0, 1]).range(['#9467BD','#FFFFFF']);
+        _colorShades['#8c564b'] = d3.scale.linear().domain([0, 1]).range(['#8C564B','#FFFFFF']);
+        _colorShades['#e377c2'] = d3.scale.linear().domain([0, 1]).range(['#E377C2','#FFFFFF']);
+        _colorShades['#7f7f7f'] = d3.scale.linear().domain([0, 1]).range(['#7F7F7F','#FFFFFF']);
+        _colorShades['#bcbd22'] = d3.scale.linear().domain([0, 1]).range(['#BCBD22','#FFFFFF']);
+        _colorShades['#17becf'] = d3.scale.linear().domain([0, 1]).range(['#17BECF','#FFFFFF']);
 
     function Treemap3d(selection) {
         _camera.setLens(100);
@@ -48,16 +60,17 @@ demo.Treemap3d = function() {
                 _zmetric = "social";
                 transform();
             });
-        _buttonBarDiv.append("button")
-            .text("ZScale: Competition")
-            .on("click", function() {
-                _zmetric = "competition";
-                transform();
-            });
+        // _buttonBarDiv.append("button")
+        //     .text("ZScale: Competition")
+        //     .on("click", function() {
+        //         _zmetric = "competition";
+        //         transform();
+        //     });
 
         function enterHandler(d) {
+            if (d.name == 'tolling'){console.log(_colorShades[_colorScale(d.group)](1));}
             var boxGeometry = new THREE.BoxGeometry(1,1,1);
-            var boxMaterial = new THREE.MeshLambertMaterial({color: _colorScale(d.group)});
+            var boxMaterial = new THREE.MeshLambertMaterial({color: _colorShades[_colorScale(d.group)](d.competition)});
             var box = new THREE.Mesh(boxGeometry, boxMaterial);
             box.castShadow = true;
             _boxMap[d.id] = box;
@@ -68,7 +81,7 @@ demo.Treemap3d = function() {
             var duration = 1000;
             var zvalue = (_zmetric === "social" ? _zscaleSocial(d.social) : (_zmetric === "competition" ? _zscaleCompetition(d.competition) : 50));
             var box = _boxMap[d.id];
-            box.material.color.set(_colorScale(d.group));
+            box.material.color.set(_colorShades[_colorScale(d.group)](d.competition));
             var newMetrics = {
                 x: d.x + (d.dx / 2) - _width / 2,
                 y: d.y + (d.dy / 2) - _height / 2,
@@ -195,7 +208,7 @@ demo.Treemap3d = function() {
 
             // Drawing the legend
             var legendSvg = d3.select("#legend").append("svg")
-                .attr("width", 200)
+                .attr("width", 400)
                 .attr("height", _height);
 
             legendSvg.selectAll("rect")
@@ -220,6 +233,12 @@ demo.Treemap3d = function() {
                     return i*20 + 54;
                 })
                 .text(function(d){ return d; });
+
+            legendSvg.append("text")
+                .style('font', '10px Arial')
+                .attr('x', 5)
+                .attr('y', (groups.length+1)*20 + 34)
+                .text('N.B. The darker the color the lower the competition');
 
             render();
             animate();

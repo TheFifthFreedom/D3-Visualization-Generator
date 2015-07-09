@@ -3,7 +3,7 @@ var chartWidth = $(document).width() - 10;
 var chartHeight = $(document).height() - 78;
 var xscale = d3.scale.linear().range([0, chartWidth]);
 var yscale = d3.scale.linear().range([0, chartHeight]);
-var colors = ['rgb(26,152,80)', 'rgb(102,189,99)', 'rgb(166,217,106)', 'rgb(217,239,139)', 'rgb(254,224,139)', 'rgb(253,174,97)', 'rgb(244,109,67)', 'rgb(215,48,39)'];
+var colors = ['rgb(0,90,50)', 'rgb(35,132,67)', 'rgb(65,171,93)', 'rgb(120,198,121)', 'rgb(173,221,142)', 'rgb(217,240,163)', 'rgb(247,252,185)', 'rgb(255,255,229)'];
 var headerHeight = 20;
 var headerColor = "#555555";
 var transitionDuration = 500;
@@ -267,22 +267,25 @@ function textHeight(d) {
 
 
 function getRGBComponents (color) {
-    var r = color.substring(1, 3);
-    var g = color.substring(3, 5);
-    var b = color.substring(5, 7);
+    var numbers = color.match(/[0-9]+/g).map(function(n){//just coerce to numbers
+        return +(n);
+    });
     return {
-        R: parseInt(r, 16),
-        G: parseInt(g, 16),
-        B: parseInt(b, 16)
+        R: parseInt(numbers[0], 16),
+        G: parseInt(numbers[1], 16),
+        B: parseInt(numbers[2], 16)
     };
 }
 
 
 function idealTextColor (bgColor) {
-    var nThreshold = 105;
+    // var nThreshold = 105;
+    // var components = getRGBComponents(bgColor);
+    // var bgDelta = (components.R * 0.299) + (components.G * 0.587) + (components.B * 0.114);
+    // return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
     var components = getRGBComponents(bgColor);
-    var bgDelta = (components.R * 0.299) + (components.G * 0.587) + (components.B * 0.114);
-    return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
+    if (components.R < 173){ return "#ffffff"; }
+    else{ return "#000000"; }
 }
 
 
