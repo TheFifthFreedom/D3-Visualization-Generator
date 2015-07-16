@@ -155,7 +155,7 @@ demo.Treemap3d = function() {
                 parameters = {};
             }
             var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "arial";
-            var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 20;
+            var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 30;
             var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 2;
             var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {r: 0, g: 0, b: 0, a: 1.0};
             var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {r: 255, g: 255, b: 255, a: 1.0};
