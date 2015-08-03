@@ -33,7 +33,7 @@ class GraphingServer(object):
         #PID Validation (to make sure it's a valid PID)
         pidOK = True
         session = requests.Session()
-        session.auth = HttpNtlmAuth('sapient.com\\lmazou', 'Kus@n@g5', session)
+        session.auth = HttpNtlmAuth('sapient.com\\lmazou', 'Kus@n@g6', session)
         r1 = session.get('http://timetracking.sapient.com/')
 
         headers = {
@@ -59,7 +59,7 @@ class GraphingServer(object):
         pmOK = False
         pmEmail = ''
         s = Server('coloads1.sapient.com', port = 3268, get_info = ALL)
-        c = Connection(s, auto_bind = True, client_strategy = SYNC, user='SAPIENT\lmazou', password='Kus@n@g5', authentication=SIMPLE, check_names=True)
+        c = Connection(s, auto_bind = True, client_strategy = SYNC, user='SAPIENT\lmazou', password='Kus@n@g6', authentication=SIMPLE, check_names=True)
         c.search('OU=Employee Users,OU=Accounts,DC=sapient,DC=com','(cn=' + pmName + ')', SUBTREE, attributes = ['description', 'mail'])
         response = c.response
 
