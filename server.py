@@ -172,9 +172,9 @@ class GraphingServer(object):
             raise cherrypy.HTTPRedirect('/showSunburst')
 
         elif viz_type == 'calendar':
-            noHeaderFile = os.path.abspath('user_data/headerFile.csv')
+            headerFile = os.path.abspath('user_data/headerFile.csv')
             r = open(uploadedFile, "r")
-            w = open(noHeaderFile, "w", newline='')
+            w = open(headerFile, "w", newline='')
             reader = csv.reader(r)
             writer = csv.writer(w)
             writer.writerow(['Day', 'Cost'])
@@ -187,6 +187,24 @@ class GraphingServer(object):
                 writer.writerow(line)
             r.close()
             w.close()
+
+            # hard-coding csv content in export html
+            calendar_export_file = open(os.path.abspath('exports/calendar.html'), "r")
+            calendar_export_contents = calendar_export_file.read()
+            calendar_export_file.close()
+            csv_string_begin_index = calendar_export_contents.index("var csv_string = '") + len("var csv_string = '")
+            csv_string_end_index = calendar_export_contents.index("';", csv_string_begin_index)
+            csv_string = calendar_export_contents[csv_string_begin_index : csv_string_end_index]
+
+            csv_file = open(headerFile, "r")
+            csv_file_contents = csv_file.read()
+            csv_file_contents = csv_file_contents.replace("\n", "\\n")
+            csv_file.close()
+
+            calendar_export_contents = calendar_export_contents.replace(csv_string, csv_file_contents)
+            calendar_export_file = open(os.path.abspath('exports/calendar.html'), "w")
+            calendar_export_file.write(calendar_export_contents)
+            calendar_export_file.close()
 
             raise cherrypy.HTTPRedirect('/showCalendar')
 
@@ -281,6 +299,10 @@ class GraphingServer(object):
     @cherrypy.expose
     def download(self, filepath):
         return serve_file(os.path.abspath('sample_data') + '/' + filepath, "application/x-download", "attachment")
+
+    @cherrypy.expose
+    def export(self, filepath):
+        return serve_file(os.path.abspath('exports') + '/' + filepath, "application/x-download", "attachment")
 
 if __name__ == '__main__':
 

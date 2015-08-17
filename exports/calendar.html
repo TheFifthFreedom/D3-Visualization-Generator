@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<html>
+    <head>
+        <style>
+            #chart{
+              font: 1.1em sans-serif;
+              width: 800px;
+              margin: 0 auto;
+            }
+            .background {
+              fill: #eee;
+            }
+            line {
+              stroke: #fff;
+            }
+            text.active {
+              fill: red;
+            }
+            .day {
+              fill: #fff;
+              stroke: #ccc;
+            }
+            .month {
+              fill: none;
+              stroke: #fff;
+              stroke-width: 4px;
+            }
+            .year-title {
+              font-size: 1.5em;
+            }
+            /* color ranges */
+            .RdYlGn .q0-10{fill:rgb(255,255,204)}
+            .RdYlGn .q1-10{fill:rgb(255,237,160)}
+            .RdYlGn .q2-10{fill:rgb(254,217,118)}
+            .RdYlGn .q3-10{fill:rgb(254,178,76)}
+            .RdYlGn .q4-10{fill:rgb(253,141,60)}
+            .RdYlGn .q5-10{fill:rgb(252,78,42)}
+            .RdYlGn .q6-10{fill:rgb(227,26,28)}
+            .RdYlGn .q7-10{fill:rgb(189,0,38)}
+            .RdYlGn .q8-10{fill:rgb(128,0,38)}
+            /*.RdYlGn .q9-10{fill:rgb(148,78,90)}*/
+            /* hover info */
+            #tooltip {
+              font: 1.1em sans-serif;
+              background-color: #fff;
+              border: 2px solid #ccc;
+              padding: 10px;
+            }
+        </style>
+        <title>Calendar View</title>
+    </head>
+
+    <body>
+
+        <div id="chart" class="clearfix"></div>
+
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="http://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript">
+            var csv_string = 'Day,Cost\n1/1/2015,"4,306"\n1/2/2015,"4,079"\n1/3/2015,"4,679"\n1/4/2015,"5,692"\n1/5/2015,"5,644"\n1/6/2015,"5,525"\n1/7/2015,"5,502"\n1/8/2015,"5,373"\n1/9/2015,"3,901"\n1/10/2015,"4,213"\n1/11/2015,"5,467"\n1/12/2015,"5,621"\n1/13/2015,"5,322"\n1/14/2015,"5,151"\n1/15/2015,"4,810"\n1/16/2015,"3,815"\n1/17/2015,"4,042"\n1/18/2015,"5,222"\n1/19/2015,"5,275"\n1/20/2015,"5,206"\n1/21/2015,"5,090"\n1/22/2015,"4,628"\n1/23/2015,"3,793"\n1/24/2015,"4,445"\n1/25/2015,"5,388"\n1/26/2015,"5,571"\n1/27/2015,"5,580"\n1/28/2015,"5,067"\n1/29/2015,"4,942"\n1/30/2015,"4,152"\n1/31/2015,"5,208"\n2/1/2015,"6,223"\n2/2/2015,"5,068"\n2/3/2015,"4,818"\n2/4/2015,"4,871"\n2/5/2015,"4,525"\n2/6/2015,"3,495"\n2/7/2015,"3,757"\n2/8/2015,"5,165"\n2/9/2015,"5,189"\n2/10/2015,"4,881"\n2/11/2015,"4,272"\n2/12/2015,"4,358"\n2/13/2015,"3,297"\n2/14/2015,"3,886"\n2/15/2015,"4,656"\n2/16/2015,"4,993"\n2/17/2015,"4,682"\n2/18/2015,"4,284"\n2/19/2015,"4,356"\n2/20/2015,"3,393"\n2/21/2015,"2,723"\n2/22/2015,"3,184"\n2/23/2015,"3,794"\n2/24/2015,"3,914"\n2/25/2015,"4,140"\n2/26/2015,"4,002"\n2/27/2015,"3,371"\n2/28/2015,"3,665"\n3/1/2015,"4,752"\n3/2/2015,"4,423"\n3/3/2015,"4,699"\n3/4/2015,"4,679"\n3/5/2015,"4,631"\n3/6/2015,"3,860"\n3/7/2015,"3,845"\n3/8/2015,"4,398"\n3/9/2015,"4,854"\n3/10/2015,"4,826"\n3/11/2015,"4,331"\n3/12/2015,"3,761"\n3/13/2015,"3,450"\n3/14/2015,"3,199"\n3/15/2015,"3,775"\n3/16/2015,"3,528"\n3/17/2015,"3,480"\n3/18/2015,"3,923"\n3/19/2015,"3,650"\n3/20/2015,"3,060"\n3/21/2015,"3,374"\n3/22/2015,"3,936"\n3/23/2015,"4,388"\n3/24/2015,"8,632"\n3/25/2015,"8,826"\n3/26/2015,"8,838"\n3/27/2015,"7,337"\n3/28/2015,"9,006"\n3/29/2015,"12,144"\n3/30/2015,"10,293"\n3/31/2015,"9,890"\n4/1/2015,"9,782"\n4/2/2015,"9,179"\n4/3/2015,"10,883"\n4/4/2015,"19,744"\n4/5/2015,"13,942"\n4/6/2015,"8,267"\n4/7/2015,"8,195"\n4/8/2015,"8,303"\n4/9/2015,"8,013"\n4/10/2015,"7,069"\n4/11/2015,"8,611"\n4/12/2015,"11,022"\n4/13/2015,"9,410"\n4/14/2015,"8,764"\n4/15/2015,"8,533"\n4/16/2015,"8,450"\n4/17/2015,"7,606"\n4/18/2015,"9,020"\n4/19/2015,"10,563"\n4/20/2015,"9,436"\n4/21/2015,"8,873"\n4/22/2015,"8,577"\n4/23/2015,"7,844"\n4/24/2015,"6,903"\n4/25/2015,"8,304"\n4/26/2015,"10,165"\n4/27/2015,"9,260"\n4/28/2015,"8,619"\n4/29/2015,"8,225"\n4/30/2015,"7,812"\n5/1/2015,"7,560"\n5/2/2015,"9,571"\n5/3/2015,"11,594"\n5/4/2015,"9,518"\n5/5/2015,"8,456"\n5/6/2015,"8,711"\n5/7/2015,"8,948"\n5/8/2015,"8,825"\n5/9/2015,"13,152"\n5/10/2015,"12,645"\n5/11/2015,"9,369"\n5/12/2015,"9,282"\n5/13/2015,"8,966"\n5/14/2015,"8,651"\n5/15/2015,"8,334"\n5/16/2015,"11,298"\n5/17/2015,"13,827"\n5/18/2015,"11,692"\n5/19/2015,"10,936"\n5/20/2015,"10,590"\n5/21/2015,"10,110"\n5/22/2015,"10,620"\n5/23/2015,"18,947"\n5/24/2015,"26,459"\n5/25/2015,"25,399"\n';
+            var csv = d3.csv.parse(csv_string);
+
+            var yearRange = [],
+                valueRange = 0;
+
+            var width = 960,
+                height = 750,
+                cellSize = 25; // cell size
+
+            var no_months_in_a_row = Math.floor(width / (cellSize * 7 + 50));
+            var shift_up = cellSize * 3;
+
+            var day = d3.time.format("%w"), // day of the week
+                day_of_month = d3.time.format("%e") // day of the month
+                day_of_year = d3.time.format("%j")
+                week = d3.time.format("%U"), // week number of the year
+                month = d3.time.format("%m"), // month number
+                year = d3.time.format("%Y"),
+                percent = d3.format(".1%"),
+                format = d3.time.format("%-m/%-d/%-Y");
+
+            var color;
+            var svg;
+            var rect;
+            var month_titles;
+            var year_title;
+            var tooltip;
+
+            function dayTitle (t0) {
+              return t0.toString().split(" ")[2];
+            };
+            function monthTitle (t0) {
+              return t0.toLocaleString("en-us", { month: "long" });
+            };
+            function yearTitle (t0) {
+              return t0.toString().split(" ")[3];
+            };
+            Array.min = function( array ){
+                return Math.min.apply( Math, array );
+            };
+            Array.max = function( array ){
+                return Math.max.apply( Math, array );
+            };
+
+            var data = d3.nest()
+              .key(function(d) {
+                  var year = parseInt(d.Day.substring(d.Day.length-2))
+                  if ((!(yearRange.indexOf(year) > -1)) && isNaN(year) == false) {
+                      yearRange.push(year)
+                  }
+                  return d.Day;
+              })
+              .rollup(function(d) { if (parseFloat(d[0].Cost.replace(",", "").replace("'", "").trim()) > valueRange) {valueRange = parseFloat(d[0].Cost.replace(",", "").replace("'", "").trim());} return d[0].Cost.trim(); })
+              .map(csv);
+
+            visualize(yearRange, valueRange);
+
+            rect.filter(function(d) { return d in data; })
+                .attr("class", function(d) { return "day " + color(parseFloat(data[d].replace(",", "").replace("'", "").trim())); })
+              .select("title")
+                .text(function(d) { return d + ": " + data[d]; });
+
+            //  Tooltip
+            rect.on("mouseover", mouseover);
+            rect.on("mouseout", mouseout);
+            function mouseover(d) {
+              tooltip.style("visibility", "visible");
+              var purchase_text = d + ": " + data[d];
+              tooltip.transition()
+                          .duration(200)
+                          .style("opacity", .9);
+              tooltip.html(purchase_text)
+                          .style("left", (d3.event.pageX)+30 + "px")
+                          .style("top", (d3.event.pageY) + "px");
+            }
+            function mouseout (d) {
+              tooltip.transition()
+                      .duration(500)
+                      .style("opacity", 0);
+              var $tooltip = $("#tooltip");
+              $tooltip.empty();
+            }
+
+            function visualize(yearRange, valueRange){
+
+              var ceiling = Math.ceil(valueRange/100)*100;
+              var firstYear = Array.min(yearRange) + 2000;
+              var lastYear = Array.max(yearRange) + 2001;
+
+              color = d3.scale.quantize()
+                  .domain([0, ceiling])
+                  .range(d3.range(9).map(function(d) { return "q" + d + "-10"; }));
+
+              svg = d3.select("#chart").selectAll("svg")
+                  .data(d3.range(firstYear, lastYear))
+                .enter().append("svg")
+                  .attr("width", width)
+                  .attr("height", height)
+                  .attr("class", "RdYlGn")
+                .append("g")
+
+              // Legend
+              var colorArray = ['rgb(255,255,204)','rgb(255,237,160)','rgb(254,217,118)','rgb(254,178,76)','rgb(253,141,60)','rgb(252,78,42)','rgb(227,26,28)','rgb(189,0,38)','rgb(128,0,38)'];
+              svg.selectAll('rect')
+                  .data(colorArray)
+                .enter().append('rect')
+                  .attr('width', cellSize)
+                  .attr('height', cellSize)
+                  .attr('x',function(d,i){
+                    return i*cellSize;
+                  })
+                  .attr('fill',function(d){
+                    return d;
+                  });
+              svg.append('text')
+                .attr('y', cellSize + 12)
+                .text('0');
+              svg.append('text')
+                .attr('text-anchor', 'end')
+                .attr('x', cellSize*9)
+                .attr('y', cellSize + 12)
+                .text(ceiling);
+
+              rect = svg.selectAll(".day")
+                  .data(function(d) {
+                    return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1));
+                  })
+                .enter().append("rect")
+                  .attr("class", "day")
+                  .attr("width", cellSize)
+                  .attr("height", cellSize)
+                  .attr("x", function(d) {
+                    var month_padding = 1.2 * cellSize*7 * ((month(d)-1) % (no_months_in_a_row));
+                    return day(d) * cellSize + month_padding;
+                  })
+                  .attr("y", function(d) {
+                    var week_diff = week(d) - week(new Date(year(d), month(d)-1, 1) );
+                    var row_level = Math.ceil(month(d) / (no_months_in_a_row));
+                    return (week_diff*cellSize) + row_level*cellSize*8 - cellSize/2 - shift_up;
+                  })
+                  .datum(format);
+
+              month_titles = svg.selectAll(".month-title")  // Jan, Feb, Mar and the whatnot
+                    .data(function(d) {
+                      return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+                  .enter().append("text")
+                    .text(monthTitle)
+                    .attr("x", function(d, i) {
+                      var month_padding = 1.2 * cellSize*7* ((month(d)-1) % (no_months_in_a_row));
+                      return month_padding;
+                    })
+                    .attr("y", function(d, i) {
+                      var week_diff = week(d) - week(new Date(year(d), month(d)-1, 1) );
+                      var row_level = Math.ceil(month(d) / (no_months_in_a_row));
+                      return (week_diff*cellSize) + row_level*cellSize*8 - cellSize - shift_up;
+                    })
+                    .attr("class", "month-title")
+                    .attr("d", monthTitle);
+
+              year_titles = svg.selectAll(".year-title")  // Jan, Feb, Mar and the whatnot
+                    .data(function(d) {
+                      return d3.time.years(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+                  .enter().append("text")
+                    .text(yearTitle)
+                    .attr("x", function(d, i) { return width/2 - 100; })
+                    .attr("y", function(d, i) { return cellSize*5.5 - shift_up; })
+                    .attr("class", "year-title")
+                    .attr("d", yearTitle);
+
+              tooltip = d3.select("body")
+                .append("div").attr("id", "tooltip")
+                .style("position", "absolute")
+                .style("z-index", "10")
+                .style("visibility", "hidden")
+                .text("a simple tooltip");
+            };
+        </script>
+    </body>
+
+</html>
