@@ -147,6 +147,24 @@ class GraphingServer(object):
             r.close()
             w.close()
 
+            # hard-coding csv content in export html
+            chord_export_file = open(os.path.abspath('exports/chord.html'), "r")
+            chord_export_contents = chord_export_file.read()
+            chord_export_file.close()
+            csv_string_begin_index = chord_export_contents.index("var csv_string = '") + len("var csv_string = '")
+            csv_string_end_index = chord_export_contents.index("';", csv_string_begin_index)
+            csv_string = chord_export_contents[csv_string_begin_index : csv_string_end_index]
+
+            csv_file = open(noHeaderFile, "r")
+            csv_file_contents = csv_file.read()
+            csv_file_contents = csv_file_contents.replace("\n", "\\n")
+            csv_file.close()
+
+            chord_export_contents = chord_export_contents.replace(csv_string, csv_file_contents)
+            chord_export_file = open(os.path.abspath('exports/chord.html'), "w")
+            chord_export_file.write(chord_export_contents)
+            chord_export_file.close()
+
             raise cherrypy.HTTPRedirect('/showChord')
 
         elif viz_type == 'sunburst':
