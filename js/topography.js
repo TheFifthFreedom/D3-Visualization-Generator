@@ -404,10 +404,11 @@ THREE.STLExporter.prototype = {
 	}() )
 };
 
-// Save to STL button
+// Save button
 $('#btn-download').on('click', function(){
-    var exporter = new THREE.STLExporter();
-    var stlString = exporter.parse(_scene);
-    var blob = new Blob([stlString], {type: 'text/plain'});
-    saveAs(blob, 'scene.stl');
+    // var exporter = new THREE.STLExporter();
+    // var stlString = exporter.parse(_scene);
+    // var blob = new Blob([stlString], {type: 'text/plain'});
+    // saveAs(blob, 'scene.stl');
+    window.location = '/export/topography.html';
 });

@@ -187,6 +187,24 @@ class GraphingServer(object):
             r.close()
             w.close()
 
+            # hard-coding csv content in export html
+            sunburst_export_file = open(os.path.abspath('exports/sunburst.html'), "r")
+            sunburst_export_contents = sunburst_export_file.read()
+            sunburst_export_file.close()
+            csv_string_begin_index = sunburst_export_contents.index("var csv_string = '") + len("var csv_string = '")
+            csv_string_end_index = sunburst_export_contents.index("';", csv_string_begin_index)
+            csv_string = sunburst_export_contents[csv_string_begin_index : csv_string_end_index]
+
+            csv_file = open(noHeaderFile, "r")
+            csv_file_contents = csv_file.read()
+            csv_file_contents = csv_file_contents.replace("\n", "\\n")
+            csv_file.close()
+
+            sunburst_export_contents = sunburst_export_contents.replace(csv_string, csv_file_contents)
+            sunburst_export_file = open(os.path.abspath('exports/sunburst.html'), "w")
+            sunburst_export_file.write(sunburst_export_contents)
+            sunburst_export_file.close()
+
             raise cherrypy.HTTPRedirect('/showSunburst')
 
         elif viz_type == 'calendar':
@@ -227,6 +245,26 @@ class GraphingServer(object):
             raise cherrypy.HTTPRedirect('/showCalendar')
 
         elif viz_type == 'linkscape':
+            # hard-coding csv content in export html
+            linkscape_export_file = open(os.path.abspath('exports/linkscape.html'), "r")
+            linkscape_export_contents = linkscape_export_file.read()
+            linkscape_export_file.close()
+            csv_string_begin_index = linkscape_export_contents.index("var csv_string = '") + len("var csv_string = '")
+            csv_string_end_index = linkscape_export_contents.index("';", csv_string_begin_index)
+            csv_string = linkscape_export_contents[csv_string_begin_index : csv_string_end_index]
+
+            uploadedFile = os.path.abspath('user_data/uploadedFile.csv')
+            csv_file = open(uploadedFile, "r")
+            csv_file_contents = csv_file.read()
+            csv_file_contents = csv_file_contents.replace("\n", "\\n")
+            csv_file_contents = csv_file_contents.replace("'", "")
+            csv_file.close()
+
+            linkscape_export_contents = linkscape_export_contents.replace(csv_string, csv_file_contents)
+            linkscape_export_file = open(os.path.abspath('exports/linkscape.html'), "w")
+            linkscape_export_file.write(linkscape_export_contents)
+            linkscape_export_file.close()
+
             raise cherrypy.HTTPRedirect('/showLinkscape')
 
         elif viz_type == 'algorithms':
@@ -236,9 +274,49 @@ class GraphingServer(object):
             raise cherrypy.HTTPRedirect('/showWordcloud')
 
         elif viz_type == 'topography':
+            # hard-coding csv content in export html
+            topography_export_file = open(os.path.abspath('exports/topography.html'), "r")
+            topography_export_contents = topography_export_file.read()
+            topography_export_file.close()
+            csv_string_begin_index = topography_export_contents.index("var csv_string = '") + len("var csv_string = '")
+            csv_string_end_index = topography_export_contents.index("';", csv_string_begin_index)
+            csv_string = topography_export_contents[csv_string_begin_index : csv_string_end_index]
+
+            uploadedFile = os.path.abspath('user_data/uploadedFile.csv')
+            csv_file = open(uploadedFile, "r")
+            csv_file_contents = csv_file.read()
+            csv_file_contents = csv_file_contents.replace("\n", "\\n")
+            csv_file_contents = csv_file_contents.replace("'", "")
+            csv_file.close()
+
+            topography_export_contents = topography_export_contents.replace(csv_string, csv_file_contents)
+            topography_export_file = open(os.path.abspath('exports/topography.html'), "w")
+            topography_export_file.write(topography_export_contents)
+            topography_export_file.close()
+
             raise cherrypy.HTTPRedirect('/showTopography')
 
         elif viz_type == 'treemap':
+            # hard-coding csv content in export html
+            treemap_export_file = open(os.path.abspath('exports/treemap.html'), "r")
+            treemap_export_contents = treemap_export_file.read()
+            treemap_export_file.close()
+            csv_string_begin_index = treemap_export_contents.index("var csv_string = '") + len("var csv_string = '")
+            csv_string_end_index = treemap_export_contents.index("';", csv_string_begin_index)
+            csv_string = treemap_export_contents[csv_string_begin_index : csv_string_end_index]
+
+            uploadedFile = os.path.abspath('user_data/uploadedFile.csv')
+            csv_file = open(uploadedFile, "r")
+            csv_file_contents = csv_file.read()
+            csv_file_contents = csv_file_contents.replace("\n", "\\n")
+            csv_file_contents = csv_file_contents.replace("'", "")
+            csv_file.close()
+
+            treemap_export_contents = treemap_export_contents.replace(csv_string, csv_file_contents)
+            treemap_export_file = open(os.path.abspath('exports/treemap.html'), "w")
+            treemap_export_file.write(treemap_export_contents)
+            treemap_export_file.close()
+
             raise cherrypy.HTTPRedirect('/showTreemap')
 
 

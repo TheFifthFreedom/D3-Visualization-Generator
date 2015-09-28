@@ -213,6 +213,7 @@ d3.csv('user_data/uploadedFile.csv', function(rows){
         childEnterTransition.selectAll(".foreignObject .labelbody .labeltext")
             // .style("display", "none")
             .style("color", function(d) {
+                console.log(d);
                 return idealTextColor(colorScale(d.competition));
             });
     }
@@ -378,8 +379,9 @@ function zoom(d) {
 
 // SVG Download
 $('#btn-download').on('click', function(){
-    var e = document.createElement('script');
-    e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
-    e.setAttribute('class', 'svg-crowbar');
-    document.body.appendChild(e);
+    // var e = document.createElement('script');
+    // e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
+    // e.setAttribute('class', 'svg-crowbar');
+    // document.body.appendChild(e);
+    window.location = '/export/treemap.html';
 });

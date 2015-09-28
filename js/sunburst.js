@@ -315,8 +315,9 @@ function buildHierarchy(csv) {
 
 // SVG Download
 $('#btn-download').on('click', function(){
-    var e = document.createElement('script');
-    e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
-    e.setAttribute('class', 'svg-crowbar');
-    document.body.appendChild(e);
+    // var e = document.createElement('script');
+    // e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
+    // e.setAttribute('class', 'svg-crowbar');
+    // document.body.appendChild(e);
+    window.location = '/export/sunburst.html';
 });

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<html>
+    <head>
+        <style>
+            body {
+                overflow: hidden;
+                margin: 0;
+                font-size: 12px;
+                font-family: "Helvetica Neue", Helvetica;
+            }
+
+            #body {
+                padding: 5px;
+            }
+
+            .footer {
+                z-index: 1;
+                display: block;
+                font-size: 26px;
+                font-weight: 200;
+                text-shadow: 0 1px 0 #fff;
+            }
+
+            svg {
+                overflow: hidden;
+            }
+
+            rect {
+                pointer-events: all;
+                cursor: pointer;
+                stroke: #EEEEEE;
+            }
+
+            .chart {
+                display: block;
+                margin: auto;
+            }
+
+            .parent .labeltext {
+                color: #FFFFFF;
+                text-align: center;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+                -webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+                -moz-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            }
+
+            .labelbody {
+                background: transparent;
+            }
+
+            .labeltext {
+                margin: 2px;
+                white-space: pre;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+                -webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+                -moz-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            }
+
+            .child .labeltext {
+                white-space: pre-wrap;
+                text-align: center;
+                text-overflow: ellipsis;
+            }
+
+            .cell {
+                font-size: 11px;
+                cursor: pointer
+            }
+        </style>
+        <title>Treemap</title>
+    </head>
+
+    <body>
+        <div id="body"></div>
+
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+        <script src="http://jnuno.com/tree-model-js/vendor/jnuno/TreeModel-min.js"></script>
+        <script type="text/javascript">
+            var supportsForeignObject = Modernizr.svgforeignobject;
+            var chartWidth = $(document).width() - 10;
+            var chartHeight = $(document).height() - 78;
+            var xscale = d3.scale.linear().range([0, chartWidth]);
+            var yscale = d3.scale.linear().range([0, chartHeight]);
+            var colors = ['rgb(0,90,50)', 'rgb(35,132,67)', 'rgb(65,171,93)', 'rgb(120,198,121)', 'rgb(173,221,142)', 'rgb(217,240,163)', 'rgb(247,252,185)', 'rgb(255,255,229)'];
+            var headerHeight = 20;
+            var headerColor = "#555555";
+            var transitionDuration = 500;
+            var root;
+            var node;
+
+            var treemap = d3.layout.treemap()
+                .round(false)
+                .size([chartWidth, chartHeight])
+                .sticky(true)
+                .value(function(d) {
+                    return d.volume;
+                });
+
+            var svg = d3.select("#body")
+                .append("svg:svg")
+                .attr("width", chartWidth)
+                .attr("height", chartHeight);
+
+            var chart = svg.append("svg:g");
+
+            var defs = svg.append("defs");
+
+            var filter = defs.append("svg:filter")
+                .attr("id", "outerDropShadow")
+                .attr("x", "-20%")
+                .attr("y", "-20%")
+                .attr("width", "140%")
+                .attr("height", "140%");
+
+            filter.append("svg:feOffset")
+                .attr("result", "offOut")
+                .attr("in", "SourceGraphic")
+                .attr("dx", "1")
+                .attr("dy", "1");
+
+            filter.append("svg:feColorMatrix")
+                .attr("result", "matrixOut")
+                .attr("in", "offOut")
+                .attr("type", "matrix")
+                .attr("values", "1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 .5 0");
+
+            filter.append("svg:feGaussianBlur")
+                .attr("result", "blurOut")
+                .attr("in", "matrixOut")
+                .attr("stdDeviation", "3");
+
+            filter.append("svg:feBlend")
+                .attr("in", "SourceGraphic")
+                .attr("in2", "blurOut")
+                .attr("mode", "normal");
+
+            var colorScale = d3.scale.quantile()
+                .domain([0, 1]) // competition
+                .range(colors);
+
+            var csv_string = 'Name,Parent,Primary,Secondary\nKeyword,,,\nbuildings for lease,Buildings For Lease,480,0.87\ncommercial buildings for lease,Buildings For Lease,260,0.78\ncommercial building for lease,Buildings For Lease,210,0.83\nindustrial buildings for lease,Buildings For Lease,170,0.66\ncentury city 15,Century City,390,0\nfox plaza century city,Century City,170,0\noffice space chicago,Chicago Office,210,0.91\nchicago office space,Chicago Office,170,0.92\noffice space for rent chicago,Chicago Office,110,0.94\ncommercial property for sale,Commercial Property,14800,0.59\ncommercial property for lease,Commercial Property,4400,0.66\ncommercial property,Commercial Property,2900,0.49\ncommercial property management,Commercial Property,2900,0.69\ncommercial properties for sale,Commercial Property,1000,0.72\ncommercial properties,Commercial Property,720,0.58\ncommercial rental property,Commercial Property,720,0.83\ncommercial property management companies,Commercial Property,590,0.83\ncommercial rentals,Commercial Property,590,0.68\nbuying commercial property,Commercial Property,480,0.47\ncommercial rental,Commercial Property,480,0.78\ncommercial property search,Commercial Property,390,0.57\ncommercial properties for lease,Commercial Property,320,0.69\nbuy commercial property,Commercial Property,320,0.65\ncommercial rental space,Commercial Property,320,0.84\ncommercial property listings,Commercial Property,260,0.84\nlease commercial property,Commercial Property,170,0.7\ncommercial real estate rental,Commercial Property,170,0.68\ncommercial property lease,Commercial Property,140,0.7\ncommercial rental properties,Commercial Property,140,0.83\nleasing commercial property,Commercial Property,110,0.55\ncommercial property rental,Commercial Property,110,0.67\ncommercial property sale,Commercial Property,90,0.45\ncoworking space,Coworking Space,1300,0.53\ncoworking office space,Coworking Space,110,0.79\nshared office space,Coworking Space,1000,0.95\nshopping center san diego,Diego Shopping,110,0.01\nshopping centers in san diego,Diego Shopping,110,0.05\neastgate mall,Eastgate Mall,6600,0\neastgate mall san diego,Eastgate Mall,210,0.02\ngreen office,Green Office,390,0.11\neco friendly building,Green Office,90,0.31\neco friendly buildings,Green Office,70,0.29\ngreen office space,Green Office,20,0.41\neco friendly office,Green Office,20,0.09\ngreen office building,Green Office,20,0.23\neco friendly office space,Green Office,10,1\ngreen commercial space,Green Office,10,0\nhyatt on wacker,Hyatt,390,0.02\nhyatt wacker chicago,Hyatt,320,0.15\nhyatt the loop chicago,Hyatt,320,0.09\nhyatt center chicago,Hyatt,260,0.06\nhyatt center,Hyatt,140,0\nla jolla real estate,La Jolla,1900,0.75\nla jolla university,La Jolla,260,0.03\nla jolla village drive,La Jolla,260,0.01\nla jolla ca real estate,La Jolla,210,0.6\nreal estate la jolla,La Jolla,140,0.7\nla jolla california real estate,La Jolla,110,0.76\noffice building,Leasing Office,1900,0.13\noffice space for lease,Leasing Office,1300,0.94\nleasing office,Leasing Office,720,0.29\noffice lease,Leasing Office,390,0.92\noffice space company,Leasing Office,390,0.2\noffice for lease,Leasing Office,320,0.89\nlease office space,Leasing Office,210,0.94\noffice lease agreement,Leasing Office,210,0.91\noffice space lease,Leasing Office,170,0.92\nleasing office space,Leasing Office,140,0.81\noffices for lease,Leasing Office,140,0.88\noffice leasing,Leasing Office,90,0.87\nmedical office for lease,Leasing Office,90,0.59\nfox plaza,Los Angeles,1300,0\ncoworking space los angeles,Los Angeles,320,0.61\noffice space los angeles,Los Angeles,210,0.94\nfox plaza los angeles,Los Angeles,170,0\noffice space for rent los angeles,Los Angeles,140,0.93\nlos angeles office space,Los Angeles,110,0.89\noffice space downtown los angeles,Los Angeles,50,0.87\ncoworking space nyc,NYC Office,720,0.95\noffice space nyc,NYC Office,590,0.97\nretail space for rent nyc,NYC Office,320,0.91\nnyc office space,NYC Office,320,0.96\nmanhattan office space,NYC Office,260,0.94\noffice space for rent nyc,NYC Office,210,0.96\nrent office space nyc,NYC Office,170,0.97\nnew york city office space,NYC Office,140,0.96\noffice space rental nyc,NYC Office,110,0.97\noffice space in nyc,NYC Office,90,0.96\nmanhattan office space for rent,NYC Office,90,0.88\nmidtown manhattan office space,NYC Office,70,0.91\nnew york city office space for rent,NYC Office,30,0.92\nbuildings for rent,Office For Rent,1300,0.71\ncommercial buildings for rent,Office For Rent,880,0.75\nbuilding for rent,Office For Rent,720,0.71\ncommercial building for rent,Office For Rent,260,0.74\nindustrial buildings for rent,Office For Rent,170,0.62\noffice buildings for rent,Office For Rent,140,0.95\noffice building for rent,Office For Rent,90,0.87\noffice space for rent,Office For Rent,4400,0.94\noffice for rent,Office For Rent,1000,0.95\noffices for rent,Office For Rent,720,0.91\ncommercial space for rent,Office For Rent,1900,0.66\ncommercial property for rent,Office For Rent,1600,0.71\ncommercial real estate for rent,Office For Rent,720,0.77\ncommercial office space for rent,Office For Rent,480,0.84\ncommercial properties for rent,Office For Rent,480,0.67\ncommercial for rent,Office For Rent,320,0.69\nrent commercial space,Office For Rent,210,0.68\ncommercial rent,Office For Rent,210,0.72\ncommercial spaces for rent,Office For Rent,170,0.79\nrenting commercial property,Office For Rent,90,0.47\nfind office space,Office Locator,140,0.84\noffice locator,Office Locator,90,0.08\noffice space finder,Office Locator,30,0.9\ncommercial real estate orange county,Orange County,210,0.59\nreal estate orange county,Orange County,210,0.64\norange county airport map,Orange County,170,0.03\norange county research center,Orange County,140,0.4\norange county office space,Orange County,50,0.92\noffice space for rent orange county,Orange County,50,0.99\nsan diego real estate,San Diego,9900,0.61\npark plaza,San Diego,5400,0.01\nwells fargo san diego,San Diego,1000,0\nuniversity town center san diego,San Diego,590,0.01\nsan diego realtors,San Diego,390,0.92\nsymphony towers,San Diego,390,0.03\nsan diego county property search,San Diego,320,0.06\nsymphony towers san diego,San Diego,320,0.04\nwells fargo plaza,San Diego,320,0\none america plaza san diego,San Diego,260,0\nsan diego county real estate,San Diego,260,0.39\nsan diego realty,San Diego,260,0.76\none america plaza,San Diego,210,0\nsan diego real estate listings,San Diego,210,0.81\noffice space san diego,San Diego,210,0.94\namerica plaza san diego,San Diego,110,0\nsan diego realestate,San Diego,110,0.76\nrevlon san diego,San Diego,110,0.37\nsan diego office space,San Diego,110,0.95\noffice space san jose,San Jose,70,0.95\nsan jose office space,San Jose,50,0.95\nsand canyon,Sand Canyon,590,0.03\ngreat america parkway santa clara,Santa Clara,110,0\nshort term rentals,Short Term,2900,0.8\nshort term rental,Short Term,880,0.78\nshort term leases,Short Term,260,0.36\nshort term rent,Short Term,170,0.7\nshort term office space,Short Term,110,0.81\nsmall office space for rent,Space Rental,880,0.94\ntemporary office space,Space Rental,480,0.86\nrental space,Space Rental,390,0.72\nspace rental,Space Rental,320,0.71\noffice rental space,Space Rental,260,0.95\nrental office space,Space Rental,210,0.93\nstudio rental space,Space Rental,140,0.44\nfurnished office space for rent,Space Rental,140,0.94\noffice space rentals,Space Rental,110,0.91\noffice space rental agency,Space Rental,110,0.6\nindustrial rental space,Space Rental,110,0.46\nrental spaces,Space Rental,110,0.57\nspectrum center,Spectrum Center,880,0.01\nuniversity research park,University Research Park,210,0\nutc san diego,Utc,1900,0\nutc shopping center,Utc,260,0.01\nsan diego utc,Utc,260,0.01\nBuildings For Lease,Keyword,,\nCentury City,Keyword,,\nChicago Office,Keyword,,\nCommercial Property,Keyword,,\nCoworking Space,Keyword,,\nDiego Shopping,Keyword,,\nEastgate Mall,Keyword,,\nGreen Office,Keyword,,\nHyatt,Keyword,,\nLa Jolla,Keyword,,\nLeasing Office,Keyword,,\nLos Angeles,Keyword,,\nNYC Office,Keyword,,\nOffice For Rent,Keyword,,\nOffice Locator,Keyword,,\nOrange County,Keyword,,\nSan Diego,Keyword,,\nSan Jose,Keyword,,\nSand Canyon,Keyword,,\nSanta Clara,Keyword,,\nShort Term,Keyword,,\nSpace Rental,Keyword,,\nSpectrum Center,Keyword,,\nUniversity Research Park,Keyword,,\nUtc,Keyword,,';
+            var rows = d3.csv.parse(csv_string);
+
+            var tree = new TreeModel(),
+                treeRoot,
+                count = 1;
+
+            rows.forEach(function(row){
+                // That's the root
+                if (row.Name == 'Keyword') {
+                    treeRoot = tree.parse({ id: count, name: row.Name, children: [] });
+                    count = count + 1;
+                }
+                // That's a leaf
+                // (We're populating the categories as we go through the leaves' parents)
+                else if (row.Parent != 'Keyword'){
+                    // Looking for the parent in the tree
+                    var existingCategory = treeRoot.first(function (node) {
+                        return node.model.name === row.Parent;
+                    });
+                    // There's already a parent category in the tree for that leaf,
+                    // we can simply add the leaf to it
+                    if (existingCategory){
+                        var newLeaf = tree.parse({ id: count, name: row.Name, volume: parseInt(row.Primary), competition: parseFloat(row.Secondary) });
+                        existingCategory.addChild(newLeaf);
+                        count = count + 1;
+                    }
+                    // That parent category is not present in the tree yet, so we must
+                    // first add it before we can add the leaf to it
+                    else{
+                        var newCategory = tree.parse({ id: count, name: row.Parent, children: [] }),
+                            newLeaf = tree.parse({ id: count+1, name: row.Name, volume: parseInt(row.Primary), competition: parseFloat(row.Secondary) });
+                        newCategory.addChild(newLeaf);
+                        treeRoot.addChild(newCategory);
+                        count = count + 2;
+                    }
+                }
+                // We've alreay found our categories, no need to account for them
+                // once they come up at the end of the CSV
+            });
+
+            node = root = treeRoot.model;
+            var nodes = treemap.nodes(root);
+
+            var children = nodes.filter(function(d) {
+                return !d.children;
+            });
+            var parents = nodes.filter(function(d) {
+                return d.children;
+            });
+
+            // create parent cells
+            var parentCells = chart.selectAll("g.cell.parent")
+                .data(parents, function(d) {
+                    return "p-" + d.id;
+                });
+            var parentEnterTransition = parentCells.enter()
+                .append("g")
+                .attr("class", "cell parent")
+                .on("click", function(d) {
+                    zoom(d);
+                });
+            parentEnterTransition.append("rect")
+                .attr("width", function(d) {
+                    return Math.max(0.01, d.dx);
+                })
+                .attr("height", headerHeight)
+                .style("fill", headerColor);
+            parentEnterTransition.append('foreignObject')
+                .attr("class", "foreignObject")
+                .append("xhtml:body")
+                .attr("class", "labelbody")
+                .append("div")
+                .attr("class", "labeltext");
+            // update transition
+            var parentUpdateTransition = parentCells.transition().duration(transitionDuration);
+            parentUpdateTransition.select(".cell")
+                .attr("transform", function(d) {
+                    return "translate(" + d.dx + "," + d.y + ")";
+                });
+            parentUpdateTransition.select("rect")
+                .attr("width", function(d) {
+                    return Math.max(0.01, d.dx);
+                })
+                .attr("height", headerHeight)
+                .style("fill", headerColor);
+            parentUpdateTransition.select(".foreignObject")
+                .attr("width", function(d) {
+                    return Math.max(0.01, d.dx);
+                })
+                .attr("height", headerHeight)
+                .select(".labelbody .labeltext")
+                .text(function(d) {
+                    return d.name;
+                });
+            // remove transition
+            parentCells.exit()
+                .remove();
+
+            // create children cells
+            var childrenCells = chart.selectAll("g.cell.child")
+                .data(children, function(d) {
+                    return "c-" + d.id;
+                });
+            // enter transition
+            var childEnterTransition = childrenCells.enter()
+                .append("g")
+                .attr("class", "cell child")
+                .on("click", function(d) {
+                    zoom(node === d.parent ? root : d.parent);
+                })
+                .on("mouseover", function() {
+                    this.parentNode.appendChild(this); // workaround for bringing elements to the front (ie z-index)
+                    d3.select(this)
+                        .attr("filter", "url(#outerDropShadow)")
+                        .select(".background")
+                        .style("stroke", "#000000");
+                })
+                .on("mouseout", function() {
+                    d3.select(this)
+                        .attr("filter", "")
+                        .select(".background")
+                        .style("stroke", "#FFFFFF");
+                });
+            childEnterTransition.append("rect")
+                .classed("background", true)
+                .style("fill", function(d) {
+                    return colorScale(d.competition);
+                });
+            childEnterTransition.append('foreignObject')
+                .attr("class", "foreignObject")
+                .attr("width", function(d) {
+                    return Math.max(0.01, d.dx);
+                })
+                .attr("height", function(d) {
+                    return Math.max(0.01, d.dy);
+                })
+                .append("xhtml:body")
+                .attr("class", "labelbody")
+                .append("div")
+                .attr("class", "labeltext")
+                .text(function(d) {
+                    return d.name;
+                });
+
+            if (supportsForeignObject) {
+                childEnterTransition.selectAll(".foreignObject")
+                    // .style("display", "none")
+                    .style("color", function(d) {
+                        return idealTextColor(colorScale(d.competition));
+                    });
+            } else {
+                childEnterTransition.selectAll(".foreignObject .labelbody .labeltext")
+                    // .style("display", "none")
+                    .style("color", function(d) {
+                        return idealTextColor(colorScale(d.competition));
+                    });
+            }
+
+            // update transition
+            var childUpdateTransition = childrenCells.transition().duration(transitionDuration);
+            childUpdateTransition.select(".cell")
+                .attr("transform", function(d) {
+                    return "translate(" + d.x  + "," + d.y + ")";
+                });
+            childUpdateTransition.select("rect")
+                .attr("width", function(d) {
+                    return Math.max(0.01, d.dx);
+                })
+                .attr("height", function(d) {
+                    return d.dy;
+                })
+                .style("fill", function(d) {
+                    return colorScale(d.competition);
+                });
+            childUpdateTransition.select(".foreignObject")
+                .attr("width", function(d) {
+                    return Math.max(0.01, d.dx);
+                })
+                .attr("height", function(d) {
+                    return Math.max(0.01, d.dy);
+                })
+                .select(".labelbody .labeltext")
+                .text(function(d) {
+                    return d.name;
+                });
+            // exit transition
+            childrenCells.exit()
+                .remove();
+
+            // d3.select("select").on("change", function() {
+            //     console.log("select zoom(node)");
+            //     treemap.value(this.value == "size" ? size : count)
+            //         .nodes(root);
+            //     zoom(node);
+            // });
+
+            zoom(node);
+
+            //and another one
+            function textHeight(d) {
+                var ky = chartHeight / d.dy;
+                yscale.domain([d.y, d.y + d.dy]);
+                return (ky * d.dy) / headerHeight;
+            }
+
+
+            function getRGBComponents (color) {
+                var numbers = color.match(/[0-9]+/g).map(function(n){//just coerce to numbers
+                    return +(n);
+                });
+                return {
+                    R: parseInt(numbers[0], 16),
+                    G: parseInt(numbers[1], 16),
+                    B: parseInt(numbers[2], 16)
+                };
+            }
+
+
+            function idealTextColor (bgColor) {
+                // var nThreshold = 105;
+                // var components = getRGBComponents(bgColor);
+                // var bgDelta = (components.R * 0.299) + (components.G * 0.587) + (components.B * 0.114);
+                // return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
+                var components = getRGBComponents(bgColor);
+                if (components.R < 173){ return "#ffffff"; }
+                else{ return "#000000"; }
+            }
+
+
+            function zoom(d) {
+                this.treemap
+                    .padding([headerHeight/(chartHeight/d.dy), 0, 0, 0])
+                    .nodes(d);
+
+                // moving the next two lines above treemap layout messes up padding of zoom result
+                var kx = chartWidth  / d.dx;
+                var ky = chartHeight / d.dy;
+                var level = d;
+
+                xscale.domain([d.x, d.x + d.dx]);
+                yscale.domain([d.y, d.y + d.dy]);
+
+                // if (node != level) {
+                //     if (supportsForeignObject) {
+                //         chart.selectAll(".cell.child .foreignObject")
+                //             .style("display", "none");
+                //     } else {
+                //         chart.selectAll(".cell.child .foreignObject .labelbody .labeltext")
+                //             .style("display", "none");
+                //     }
+                // }
+
+                var zoomTransition = chart.selectAll("g.cell").transition().duration(transitionDuration)
+                    .attr("transform", function(d) {
+                        return "translate(" + xscale(d.x) + "," + yscale(d.y) + ")";
+                    })
+                    .each("end", function(d, i) {
+                        if (!i && (level !== self.root)) {
+                            chart.selectAll(".cell.child")
+                                .filter(function(d) {
+                                    return d.parent === self.node; // only get the children for selected group
+                                })
+                                .select(".foreignObject .labelbody .labeltext")
+                                .style("color", function(d) {
+                                    return idealTextColor(colorScale(d.competition));
+                                });
+
+                            // if (supportsForeignObject) {
+                            //     chart.selectAll(".cell.child")
+                            //         .filter(function(d) {
+                            //             return d.parent === self.node; // only get the children for selected group
+                            //         })
+                            //         .select(".foreignObject")
+                            //         .style("display", "")
+                            // } else {
+                            //     chart.selectAll(".cell.child")
+                            //         .filter(function(d) {
+                            //             return d.parent === self.node; // only get the children for selected group
+                            //         })
+                            //         .select(".foreignObject .labelbody .labeltext")
+                            //         .style("display", "")
+                            // }
+                        }
+                    });
+
+                zoomTransition.select(".foreignObject")
+                    .attr("width", function(d) {
+                        return Math.max(0.01, kx * d.dx);
+                    })
+                    .attr("height", function(d) {
+                        return d.children ? headerHeight: Math.max(0.01, ky * d.dy);
+                    })
+                    .select(".labelbody .labeltext")
+                    .text(function(d) {
+                        return d.name;
+                    });
+
+                // update the width/height of the rects
+                zoomTransition.select("rect")
+                    .attr("width", function(d) {
+                        return Math.max(0.01, kx * d.dx);
+                    })
+                    .attr("height", function(d) {
+                        return d.children ? headerHeight : Math.max(0.01, ky * d.dy);
+                    })
+                    .style("fill", function(d) {
+                        return d.children ? headerColor : colorScale(d.competition);
+                    });
+
+                node = d;
+
+                if (d3.event) {
+                    d3.event.stopPropagation();
+                }
+            }
+        </script>
+    </body>
+</html>

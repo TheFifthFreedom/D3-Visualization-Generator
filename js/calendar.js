@@ -182,5 +182,5 @@ $('#btn-download').on('click', function(){
     // e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
     // e.setAttribute('class', 'svg-crowbar');
     // document.body.appendChild(e);
-    window.location = '/export/calendar.html'
+    window.location = '/export/calendar.html';
 });

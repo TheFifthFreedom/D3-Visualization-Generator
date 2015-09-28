@@ -140,5 +140,5 @@ $('#btn-download').on('click', function(){
     // e.setAttribute('src', 'https://nytimes.github.io/svg-crowbar/svg-crowbar.js');
     // e.setAttribute('class', 'svg-crowbar');
     // document.body.appendChild(e);
-    window.location = '/export/chord.html'
+    window.location = '/export/chord.html';
 });
