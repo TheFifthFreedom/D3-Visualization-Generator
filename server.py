@@ -6,6 +6,7 @@ import csv
 import os
 import requests
 
+from urllib.parse import urlparse
 from cherrypy.lib.static import serve_file
 from requests_ntlm import HttpNtlmAuth
 from ldap3 import Server, Connection, SIMPLE, SYNC, ASYNC, SUBTREE, ALL
@@ -244,6 +245,101 @@ class GraphingServer(object):
 
             raise cherrypy.HTTPRedirect('/showCalendar')
 
+        elif viz_type == 'line':
+
+            input = open('user_data/uploadedFile.csv', 'r', encoding='utf-8', errors='ignore')
+            csv_reader = csv.DictReader(input)
+            output = open('user_data/modified.csv', 'w')
+            fieldnames = ['Position', 'Sum of Clicks', 'Sum of Impressions', 'CTR']
+            csv_writer = csv.DictWriter(output, fieldnames=fieldnames)
+            csv_writer.writeheader()
+
+            dictionary = {}
+            # Key: Position
+            # Value[0]: clicks
+            # Value[1]: impressions
+
+            for row in csv_reader:
+                position = round(float(row['Position']))
+                clicks = int(row['Clicks'])
+                impressions = int(row['Impressions'])
+
+                if position not in dictionary:
+                    dictionary[position] = [clicks, impressions]
+                else:
+                    dictionary[position][0] += clicks
+                    dictionary[position][1] += impressions
+
+            for key, value in dictionary.items():
+                ctr = (value[0] / value[1])
+                csv_writer.writerow({'Position': key, 'Sum of Clicks': value[0], 'Sum of Impressions': value[1], 'CTR': ctr})
+
+            input.close()
+            output.close()
+
+            raise cherrypy.HTTPRedirect('/showLine')
+
+        elif viz_type == 'bar':
+
+            input = open('user_data/uploadedFile.csv', 'r', encoding='utf-8', errors='ignore')
+            csv_reader = csv.DictReader(input)
+
+            output = open('user_data/modified.csv', 'w')
+            fieldnames = ['Domain', 'Sum of Estimated Clicks', 'Position']
+            csv_writer = csv.DictWriter(output, fieldnames=fieldnames)
+            csv_writer.writeheader()
+
+            dictionary = {}
+            # Key: Domain
+            # Value[0]: estimated clicks
+            # Value[1]: positions[]
+
+            ctr_lookup = {
+                1: 0.25,
+                2: 0.14,
+                3: 0.11,
+                4: 0.08,
+                5: 0.06,
+                6: 0.05,
+                7: 0.03,
+                8: 0.02,
+                9: 0.02,
+                10: 0.02,
+                11: 0.01,
+                12: 0.01,
+                13: 0.01,
+                14: 0.01,
+                15: 0.01,
+                16: 0.01,
+                17: 0.01,
+                18: 0.01,
+                19: 0.01,
+                20: 0.01
+            }
+
+            for row in csv_reader:
+                url = urlparse(row['Website'])
+                domain = url.netloc.replace('www.', '')
+                position = int(row['Position'])
+                volume = int(row['Volume'].replace(',', ''))
+                ctr = ctr_lookup[position]
+                clicks = ctr * volume
+
+                if domain not in dictionary:
+                    dictionary[domain] = [clicks, [position]]
+                else:
+                    dictionary[domain][0] += clicks
+                    dictionary[domain][1].append(position)
+
+            for key, value in dictionary.items():
+                position_avg = sum(value[1]) / float(len(value[1]))
+                csv_writer.writerow({'Domain': key, 'Sum of Estimated Clicks': value[0], 'Position': position_avg})
+
+            input.close()
+            output.close()
+
+            raise cherrypy.HTTPRedirect('/showBar')
+
         elif viz_type == 'linkscape':
             # hard-coding csv content in export html
             linkscape_export_file = open(os.path.abspath('exports/linkscape.html'), "r")
@@ -319,24 +415,23 @@ class GraphingServer(object):
 
             raise cherrypy.HTTPRedirect('/showTreemap')
 
-
     @cherrypy.expose
-    def showChord(self):
+    def showAlgorithms(self):
         # Checking to see if the cookie is still there
         request_cookie = cherrypy.request.cookie
         if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
             raise cherrypy.HTTPRedirect('/index')
 
-        return open(os.path.abspath('html/chord.html'))
+        return open(os.path.abspath('html/algorithms.html'))
 
     @cherrypy.expose
-    def showSunburst(self):
+    def showBar(self):
         # Checking to see if the cookie is still there
         request_cookie = cherrypy.request.cookie
         if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
             raise cherrypy.HTTPRedirect('/index')
 
-        return open(os.path.abspath('html/sunburst.html'))
+        return open(os.path.abspath('html/bar.html'))
 
     @cherrypy.expose
     def showCalendar(self):
@@ -348,6 +443,24 @@ class GraphingServer(object):
         return open(os.path.abspath('html/calendar.html'))
 
     @cherrypy.expose
+    def showChord(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
+        return open(os.path.abspath('html/chord.html'))
+
+    @cherrypy.expose
+    def showLine(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
+        return open(os.path.abspath('html/line.html'))
+
+    @cherrypy.expose
     def showLinkscape(self):
         # Checking to see if the cookie is still there
         request_cookie = cherrypy.request.cookie
@@ -357,22 +470,13 @@ class GraphingServer(object):
         return open(os.path.abspath('html/linkscape.html'))
 
     @cherrypy.expose
-    def showAlgorithms(self):
+    def showSunburst(self):
         # Checking to see if the cookie is still there
         request_cookie = cherrypy.request.cookie
         if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
             raise cherrypy.HTTPRedirect('/index')
 
-        return open(os.path.abspath('html/algorithms.html'))
-
-    @cherrypy.expose
-    def showWordcloud(self):
-        # Checking to see if the cookie is still there
-        request_cookie = cherrypy.request.cookie
-        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
-            raise cherrypy.HTTPRedirect('/index')
-
-        return open(os.path.abspath('html/wordcloud.html'))
+        return open(os.path.abspath('html/sunburst.html'))
 
     @cherrypy.expose
     def showTopography(self):
@@ -391,6 +495,15 @@ class GraphingServer(object):
             raise cherrypy.HTTPRedirect('/index')
 
         return open(os.path.abspath('html/treemap.html'))
+
+    @cherrypy.expose
+    def showWordcloud(self):
+        # Checking to see if the cookie is still there
+        request_cookie = cherrypy.request.cookie
+        if (not request_cookie.keys()) or (request_cookie['session_id'].value not in valid_sessions):
+            raise cherrypy.HTTPRedirect('/index')
+
+        return open(os.path.abspath('html/wordcloud.html'))
 
     @cherrypy.expose
     def download(self, filepath):

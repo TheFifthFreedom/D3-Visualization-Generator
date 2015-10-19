@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<html>
+    <head>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/header.css">
+        <title>Bar Chart</title>
+    </head>
+
+    <body>
+        <div id="overhead">
+            <fieldset>
+                <form class="form-inline" action="upload" method="post" enctype="multipart/form-data">
+                    <!-- <input type="file" name="input_file"></input> -->
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                                Select CSV to upload&hellip; <input type="file" name="input_file" multiple>
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" style="width: 250px" readonly>
+                    </div>
+                    <select class="form-control" name="viz_type">
+                        <option value disabled selected hidden>-- Select a Visualization --</option>
+                        <option value="algorithms" data-title="Instructions" data-content="This requires a CSV file with two titled columns: the first should be called 'Date' and each row should follow the format d-Mmm-yy (ex: 1-Oct-13). The second one should be called 'Visits' and contain the number of visits to the site you're studying for each date.">Algorithms Impact Report</option>
+                        <option value="calendar" data-title="Instructions" data-content="This requires a CSV file with just two untitled columns: the first should contain one date in each row in the format M/D/YYYY, and the second should contain any numerical value you want to track.">Calendar View</option>
+                        <option value="chord" data-title="Instructions" data-content="This requires the Top Conversion Paths CSV export from Google Analytics, which you can get by navigating via the GA left-hand side menu to Conversions > Multi-Channel Funnels > Top Conversion Paths">Chord Diagram</option>
+                        <option value="line" data-title="Instructions" data-content="This requires a CSV file with five titled columns: Queries, Clicks, Impressions, CTR and Position (case-sensitive).">Line Chart</option>
+                        <option value="bar" data-title="Instructions" data-content="This requires a CSV with four titled columns: Keyword, Position, Website and Volume (case-sensitive).">Bar Chart</option>
+                        <option value="linkscape" data-title="Instructions" data-content="This requires a CSV file modeled after moz' advanced inbound links report - it expects at least two columns: one of them named 'Source' and another named 'Target', each containing whatever you want. If you wish to add further dimensions, adding a 'Domain Authority' column will impact the nodes' colors, while adding a 'Number of Domains Linking to this Page' column will impact the nodes' sizes. Check the sample file if you're unsure.">LinkScape</option>
+                        <option value="sunburst" data-title="Instructions" data-content="This requires the Top Conversion Paths CSV export from Google Analytics, which you can get by navigating via the GA left-hand side menu to Conversions > Multi-Channel Funnels > Top Conversion Paths">Sequences Sunburst</option>
+                        <option value="topography" data-title="Instructions" data-content="This requires a CSV file which lists keywords with their associated search volume, competition, categories and social volume. The format is highly unusual, so feel free to study the sample file below to familiarize yourself with how it is supposed to look like.">Content Topography</option>
+                        <option value="treemap" data-title="Instructions" data-content="This requires a CSV file which lists keywords with their associated search volume, competition and categories. The format is highly unusual, so feel free to study the sample file below to familiarize yourself with how it is supposed to look like.">Treemap</option>
+                        <option value="wordcloud" data-title="Instructions" data-content="This requires a CSV file with two untitled columns: each row in the first column should contain one or more words, while each row in the the second column should contain the value which will define the size of the font for that word in the word cloud. Make sure this value is an integer.">Word Cloud</option>
+                    </select>
+                    <input id="btn-submit" class="btn btn-default" type="submit" value="Submit" disabled="disabled">
+                    <button id="btn-download" type="button" class="btn btn-success">Download</button>
+                </form>
+            </fieldset>
+        </div>
+
+        <div id="chart"></div>
+
+
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+        <script src="js/header.js"></script>
+        <script src="js/bar.js"></script>
+    </body>
+</html>
