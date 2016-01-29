@@ -11,7 +11,8 @@ var svg = d3.select("body").append("svg")
     .append('svg:g');
 
 var force = d3.layout.force()
-    .size([width, height]);
+    .size([width, height])
+    .charge(-200);
 
 function redraw() {
   svg.attr("transform",
@@ -53,7 +54,7 @@ d3.csv("user_data/uploadedFile.csv", function(links) {
 
   var sizeScale = d3.scale.linear()
     .domain([0, numberOfDomainsLinkingToDomainUpperBound])
-    .range([3, 8])
+    .range([3, 100])
     .clamp(true);
 
   // Extract the array of nodes from the map by name.

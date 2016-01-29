@@ -34,7 +34,7 @@ class GraphingServer(object):
         #PID Validation (to make sure it's a valid PID)
         pidOK = True
         session = requests.Session()
-        session.auth = HttpNtlmAuth('sapient.com\\lmazou', 'Kus@n@g6', session)
+        session.auth = HttpNtlmAuth('sapient.com\\lmazou', 'Kus@n@g8', session)
         r1 = session.get('http://timetracking.sapient.com/')
 
         headers = {
@@ -60,7 +60,7 @@ class GraphingServer(object):
         pmOK = False
         pmEmail = ''
         s = Server('coloads1.sapient.com', port = 3268, get_info = ALL)
-        c = Connection(s, auto_bind = True, client_strategy = SYNC, user='SAPIENT\lmazou', password='Kus@n@g6', authentication=SIMPLE, check_names=True)
+        c = Connection(s, auto_bind = True, client_strategy = SYNC, user='SAPIENT\lmazou', password='Kus@n@g8', authentication=SIMPLE, check_names=True)
         c.search('OU=Employee Users,OU=Accounts,DC=sapient,DC=com','(cn=' + pmName + ')', SUBTREE, attributes = ['description', 'mail'])
         response = c.response
 
@@ -138,7 +138,7 @@ class GraphingServer(object):
 
         if viz_type == 'chord':
             noHeaderFile = os.path.abspath('user_data/noHeaderFile.csv')
-            r = open(uploadedFile, "r")
+            r = open(uploadedFile, "r", encoding='utf-8', errors='ignore')
             w = open(noHeaderFile, "w", newline='')
             reader = csv.reader(r)
             writer = csv.writer(w)
@@ -170,7 +170,7 @@ class GraphingServer(object):
 
         elif viz_type == 'sunburst':
             noHeaderFile = os.path.abspath('user_data/noHeaderFile.csv')
-            r = open(uploadedFile, "r")
+            r = open(uploadedFile, "r", encoding='utf-8', errors='ignore')
             w = open(noHeaderFile, "w", newline='')
             reader = csv.reader(r)
             writer = csv.writer(w)
@@ -210,7 +210,7 @@ class GraphingServer(object):
 
         elif viz_type == 'calendar':
             headerFile = os.path.abspath('user_data/headerFile.csv')
-            r = open(uploadedFile, "r")
+            r = open(uploadedFile, "r", encoding='utf-8', errors='ignore')
             w = open(headerFile, "w", newline='')
             reader = csv.reader(r)
             writer = csv.writer(w)
@@ -350,7 +350,7 @@ class GraphingServer(object):
             csv_string = linkscape_export_contents[csv_string_begin_index : csv_string_end_index]
 
             uploadedFile = os.path.abspath('user_data/uploadedFile.csv')
-            csv_file = open(uploadedFile, "r")
+            csv_file = open(uploadedFile, "r", encoding='utf-8', errors='ignore')
             csv_file_contents = csv_file.read()
             csv_file_contents = csv_file_contents.replace("\n", "\\n")
             csv_file_contents = csv_file_contents.replace("'", "")
@@ -379,7 +379,7 @@ class GraphingServer(object):
             csv_string = topography_export_contents[csv_string_begin_index : csv_string_end_index]
 
             uploadedFile = os.path.abspath('user_data/uploadedFile.csv')
-            csv_file = open(uploadedFile, "r")
+            csv_file = open(uploadedFile, "r", encoding='utf-8', errors='ignore')
             csv_file_contents = csv_file.read()
             csv_file_contents = csv_file_contents.replace("\n", "\\n")
             csv_file_contents = csv_file_contents.replace("'", "")
@@ -402,7 +402,7 @@ class GraphingServer(object):
             csv_string = treemap_export_contents[csv_string_begin_index : csv_string_end_index]
 
             uploadedFile = os.path.abspath('user_data/uploadedFile.csv')
-            csv_file = open(uploadedFile, "r")
+            csv_file = open(uploadedFile, "r", encoding='utf-8', errors='ignore')
             csv_file_contents = csv_file.read()
             csv_file_contents = csv_file_contents.replace("\n", "\\n")
             csv_file_contents = csv_file_contents.replace("'", "")

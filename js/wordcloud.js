@@ -26,7 +26,7 @@ d3.text("user_data/uploadedFile.csv", function(text){
         .text(function(d){ return d[0]; })
         // .padding(5)
         .rotate(function() { return 0; })
-        .font("Impact")
+        .font("emoji")
         .fontSize(function(d) { return fontSize(d[1]); })
         .on("end", draw)
         .start();
@@ -41,7 +41,7 @@ d3.text("user_data/uploadedFile.csv", function(text){
           .data(words)
         .enter().append("text")
           .style("font-size", function(d) { return d.size + "px"; })
-          .style("font-family", "Impact")
+          .style("font-family", "emoji")
           .style("fill", function(d, i) { return colorScale(i); })
           .attr("text-anchor", "middle")
           .attr("transform", function(d) {
