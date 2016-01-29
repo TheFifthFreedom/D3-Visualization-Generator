@@ -13,7 +13,8 @@
   font-family: emoji;
 
   /* Fonts for text outside emoji blocks */
-  src: local('Droid Sans Mono'),
+  src: local('Impact'),
+       local('Droid Sans Mono'),
        local('Lucida Console'),
        local('Arial Monospaced'),
        local(Arial);
